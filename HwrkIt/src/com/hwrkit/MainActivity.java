@@ -1,5 +1,6 @@
 package com.hwrkit;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import android.app.ActionBar;
@@ -135,6 +136,62 @@ public class MainActivity extends Activity
             return rootView;
         }
 
+        
+        /* ********************* */
+        /*   ANONYMOUS CLASSES   */
+        /* ********************* */
+        
+     // Create a Classes Fragment
+    	public class ClassesFragment extends Fragment {
+    		public ClassesFragment() {
+    		}
+
+    		@Override
+    		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    				Bundle savedInstanceState) {
+    			View ret = inflater.inflate(R.layout.fragment_classes, container,
+    					false);
+    			loadClasses(ret);
+    			return ret;
+    		}
+    	}
+    	
+    	// This function helps the classes list load
+    	@SuppressLint("ClickableViewAccessibility")
+    	public void loadClasses(View ret){
+    		/*// get listView playout id
+    		final ListView playlistLayout = (ListView) ret.findViewById(android.R.id.list);
+    		
+    		// create the adapter, sending the playlist made
+    	    final PlayListAdapter adapter = new PlayListAdapter(this,
+    	            playlist);
+    	    
+    	    // set adapter to listView layout
+    		playlistLayout.setAdapter(adapter);
+    		
+    		playlistLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    			@Override
+    			public void onItemClick(AdapterView<?> parent, View view,
+    					int position, long id) {
+    				// display song info of song selected
+    				
+    				currentSong = playlist.get(position);
+    				playlist.play(true, onShuffle);
+    				Player.getInstance().play();
+    				// This is a workaround for the first song bug
+    				Player.getInstance().next();
+    				Player.getInstance().previous();
+    				// *******************************************
+    				for(int i = 0; i<position; i++){
+    					Player.getInstance().next();
+    				}
+    				//Toast toast = Toast.makeText(getApplicationContext(),
+    				//		Integer.valueOf(position).toString(), Toast.LENGTH_SHORT);
+    				//toast.show();
+    				change(2);
+    			}});*/
+    	}
+    	
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
