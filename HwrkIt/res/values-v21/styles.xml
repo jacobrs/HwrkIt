@@ -1,5 +1,22 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Material.Light"></style>
+	<color name="yellow">#FFEB3B</color>
+	<color name="darkYellow">#FBC02D</color>
+	<color name="accent">#FFFF00</color>
+	<style name="AppTheme" parent="android:Theme.Material.Light">
+    	<!-- colorPrimary is used for the default action bar background -->
+    	<item name="colorPrimary">@color/yellow</item>
+
+    	<!-- colorPrimaryDark is used for the status bar -->
+    	<item name="colorPrimaryDark">@color/darkYellow</item>
+
+    	<!-- colorAccent is used as the default value for colorControlActivated,
+         which is used to tint widgets -->
+    	<item name="colorAccent">@color/accent</item>
+
+    <!-- You can also set colorControlNormal, colorControlActivated
+         colorControlHighlight, and colorSwitchThumbNormal. -->
+    
+	</style>
 
 </resources>
