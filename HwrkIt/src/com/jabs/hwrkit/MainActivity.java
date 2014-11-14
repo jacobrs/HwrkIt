@@ -1,11 +1,10 @@
-package com.hwrkit;
+package com.jabs.hwrkit;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -39,7 +38,7 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -51,7 +50,7 @@ public class MainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
@@ -72,7 +71,7 @@ public class MainActivity extends Activity
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
@@ -136,62 +135,6 @@ public class MainActivity extends Activity
             return rootView;
         }
 
-        
-        /* ********************* */
-        /*   ANONYMOUS CLASSES   */
-        /* ********************* */
-        
-     // Create a Classes Fragment
-    	public class ClassesFragment extends Fragment {
-    		public ClassesFragment() {
-    		}
-
-    		@Override
-    		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-    				Bundle savedInstanceState) {
-    			View ret = inflater.inflate(R.layout.fragment_classes, container,
-    					false);
-    			loadClasses(ret);
-    			return ret;
-    		}
-    	}
-    	
-    	// This function helps the classes list load
-    	@SuppressLint("ClickableViewAccessibility")
-    	public void loadClasses(View ret){
-    		/*// get listView playout id
-    		final ListView playlistLayout = (ListView) ret.findViewById(android.R.id.list);
-    		
-    		// create the adapter, sending the playlist made
-    	    final PlayListAdapter adapter = new PlayListAdapter(this,
-    	            playlist);
-    	    
-    	    // set adapter to listView layout
-    		playlistLayout.setAdapter(adapter);
-    		
-    		playlistLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    			@Override
-    			public void onItemClick(AdapterView<?> parent, View view,
-    					int position, long id) {
-    				// display song info of song selected
-    				
-    				currentSong = playlist.get(position);
-    				playlist.play(true, onShuffle);
-    				Player.getInstance().play();
-    				// This is a workaround for the first song bug
-    				Player.getInstance().next();
-    				Player.getInstance().previous();
-    				// *******************************************
-    				for(int i = 0; i<position; i++){
-    					Player.getInstance().next();
-    				}
-    				//Toast toast = Toast.makeText(getApplicationContext(),
-    				//		Integer.valueOf(position).toString(), Toast.LENGTH_SHORT);
-    				//toast.show();
-    				change(2);
-    			}});*/
-    	}
-    	
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
