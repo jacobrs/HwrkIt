@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="yellow">#f39c12</color>
-	<color name="darkYellow">#FBC02D</color>
+    <color name="yellow">#FBC02D</color>
+	<color name="darkYellow">#f39c12</color>
 	<color name="grey500">#9E9E9E</color>
 	<color name="yellow50">#FFFDE7</color>
 	<color name="yellow100">#FFF9C4</color>
