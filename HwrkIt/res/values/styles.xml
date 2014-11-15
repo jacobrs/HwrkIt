@@ -1,6 +1,26 @@
 <resources>
 	<color name="yellow">#f39c12</color>
 	<color name="darkYellow">#FBC02D</color>
+	<color name="grey500">#9E9E9E</color>
+	<color name="yellow50">#FFFDE7</color>
+	<color name="yellow100">#FFF9C4</color>
+	<color name="yellow200">#FFF59D</color>
+	<color name="yellow300">#FFF176</color>
+	<color name="yellow400">#FFEE58</color>
+	<color name="yellow500">#FFEB3B</color>
+	<color name="green50">#E8F5E9</color>
+	<color name="green100">#C8E6C9</color>
+	<color name="green200">#A5D6A7</color>
+	<color name="green300">#81C784</color>
+	<color name="green400">#66BB6A</color>
+	<color name="green500">#4CAF50</color>
+	<color name="trans">#00000000 </color>
+	<color name="blue50">#E3F2FD</color>
+	<color name="blue100">#BBDEFB</color>
+	<color name="blue200">#90CAF9</color>
+	<color name="blue300">#64B5F6</color>
+	<color name="blue400">#42A5F5</color>
+	<color name="blue500">#2196F3</color>
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -19,5 +39,4 @@
         <item name="colorPrimaryDark">@color/darkYellow</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
 </resources>
