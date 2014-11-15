@@ -20,7 +20,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_login" 
-            android:icon="@drawable/ic_logo" >
+            android:logo="@drawable/ic_logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
