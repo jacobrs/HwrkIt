@@ -1,11 +1,15 @@
 package com.jabs.hwrkit;
 
+import com.jabs.hwrkit.PieChart;
+import com.jabs.hwrkit.R;
+
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -131,7 +135,11 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_login, container, false);
+            View rootView = inflater.inflate(R.layout.statistics_fragment, container, false);
+            final PieChart pc = (PieChart) rootView.findViewById(R.id.pieChart);
+    		pc.addPieChart("1", 40, Color.BLACK);
+    		pc.addPieChart("2", 80, Color.RED);
+    		pc.addPieChart("3", 60, Color.GREEN);
             return rootView;
         }
 
