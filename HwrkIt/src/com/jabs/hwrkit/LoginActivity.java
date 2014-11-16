@@ -34,9 +34,9 @@ public class LoginActivity extends ActionBarActivity {
 				// inflate new view
 				Toast toast = Toast.makeText(getApplicationContext(), "Login was clicked!", Toast.LENGTH_SHORT);
 				toast.show();
-				//LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				//View mainView = inflater.inflate(R.layout.activity_main, null);
-				
+				// LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				// View mainView = inflater.inflate(R.layout.activity_main, null);
+				// need to inflate the main page...
 			}	
 			
 		});
