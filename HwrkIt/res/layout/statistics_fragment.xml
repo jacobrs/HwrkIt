@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<com.jabs.hwrkit.PieChart
-	    android:id="@+id/pieChart"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
+	<com.echo.holographlibrary.PieGraph
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/graph"/>
 
-    </com.jabs.hwrkit.PieChart>
 </LinearLayout>
