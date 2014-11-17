@@ -32,7 +32,6 @@ public class LoginActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				startActivity(mainActivity);
-				finish();
 			}
 		});
 	}

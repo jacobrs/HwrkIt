@@ -20,7 +20,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_login" 
-            android:logo="@drawable/ic_logo" >
+            android:logo="@drawable/ic_logo"
+            android:noHistory="true" >
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
