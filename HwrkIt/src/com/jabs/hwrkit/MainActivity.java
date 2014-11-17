@@ -138,25 +138,24 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.statistics_fragment, container, false);
+            //Add Piegraph data "here"(stub)
             PieGraph pg = (PieGraph) rootView.findViewById(R.id.graph);
             PieSlice slice = new PieSlice();
             slice.setColor(Color.parseColor("#99CC00"));
-            slice.setValue(2);
+            slice.setValue(6);
             pg.addSlice(slice);
             slice = new PieSlice();
-            slice.setColor(Color.parseColor("#FFBB33"));
-            slice.setValue(3);
+            slice.setColor(Color.parseColor("#D3D3D3"));
+            slice.setValue(4);
             pg.addSlice(slice);
-            slice = new PieSlice();
-            slice.setColor(Color.parseColor("#AA66CC"));
-            slice.setValue(8);
-            pg.addSlice(slice);
-            pg.setInnerCircleRatio(150); ////////////Random size
+            pg.setInnerCircleRatio(175); ////////////Random size
+            //Animate that!
             for (PieSlice s : pg.getSlices())
                 s.setGoalValue((float)Math.random() * 10);
             pg.setDuration(1000);//default if unspecified is 300 ms
             pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
             pg.animateToGoalValues();
+            
             return rootView;
         }
 
