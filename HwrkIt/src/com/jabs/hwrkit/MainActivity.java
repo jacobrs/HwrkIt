@@ -1,6 +1,13 @@
 package com.jabs.hwrkit;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.jabs.adapters.ClassesAdapter;
+import com.jabs.structures.Class;
+
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -36,7 +44,6 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -63,6 +70,17 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
+                
+                /*FragmentManager fragmentManager = getSupportFragmentManager();
+                if(fragmentManager.getBackStackEntryCount()>0) {
+                    fragmentManager.beginTransaction().remove(fragmentManager.findFragmentById(fragmentManager.getBackStackEntryCount() - 1));
+                }
+                fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .add(R.id.container, new ClassFragment()).commit();*/
+                
+                getFragmentManager().beginTransaction()
+				.replace(R.id.container, new ClassFragment())
+				.addToBackStack(null).commit();
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
@@ -131,7 +149,8 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_login, container, false);
+        	//getFragmentManager().beginTransaction().replace(R.id.container, this).addToBackStack(null).commit();
+        	View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
 
