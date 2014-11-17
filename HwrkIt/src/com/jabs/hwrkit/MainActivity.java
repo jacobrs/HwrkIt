@@ -1,16 +1,11 @@
 package com.jabs.hwrkit;
 
-import com.echo.holographlibrary.PieGraph;
-import com.echo.holographlibrary.PieSlice;
-import com.jabs.hwrkit.R;
-
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -137,26 +131,7 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.statistics_fragment, container, false);
-            PieGraph pg = (PieGraph) rootView.findViewById(R.id.graph);
-            PieSlice slice = new PieSlice();
-            slice.setColor(Color.parseColor("#99CC00"));
-            slice.setValue(2);
-            pg.addSlice(slice);
-            slice = new PieSlice();
-            slice.setColor(Color.parseColor("#FFBB33"));
-            slice.setValue(3);
-            pg.addSlice(slice);
-            slice = new PieSlice();
-            slice.setColor(Color.parseColor("#AA66CC"));
-            slice.setValue(8);
-            pg.addSlice(slice);
-            pg.setInnerCircleRatio(150); ////////////Random size
-            for (PieSlice s : pg.getSlices())
-                s.setGoalValue((float)Math.random() * 10);
-            pg.setDuration(1000);//default if unspecified is 300 ms
-            pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
-            pg.animateToGoalValues();
+            View rootView = inflater.inflate(R.layout.activity_main, container, false);
             return rootView;
         }
 
