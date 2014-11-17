@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <AutoCompleteTextView
+        <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +35,19 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" 
+            android:background="@color/red400"
+            android:layout_marginTop="15dp" >
+            <TextView
+	            android:id="@+id/login_errors"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:visibility="gone" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/username_sign_in_button"
