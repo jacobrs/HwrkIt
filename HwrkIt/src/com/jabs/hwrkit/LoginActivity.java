@@ -2,16 +2,15 @@ package com.jabs.hwrkit;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -21,24 +20,19 @@ public class LoginActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_login);
 		
 		ActionBar actionBar = getSupportActionBar();
-		getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); 
-		getSupportActionBar().setCustomView(R.layout.abs_login_layout);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); 
+		actionBar.setCustomView(R.layout.abs_login_layout);
 		
-		Button login = (Button)findViewById(R.id.username_sign_in_button);
-		login.setOnClickListener(new OnClickListener(){
-
+		Button loginBtn = (Button) findViewById(R.id.username_sign_in_button);
+		
+		final Intent mainActivity = new Intent(this, MainActivity.class);
+		
+		loginBtn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Verify successful login
-				
-				// inflate new view
-				Toast toast = Toast.makeText(getApplicationContext(), "Login was clicked!", Toast.LENGTH_SHORT);
-				toast.show();
-				// LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				// View mainView = inflater.inflate(R.layout.activity_main, null);
-				// need to inflate the main page...
-			}	
-			
+				// TODO Auto-generated method stub
+				startActivity(mainActivity);
+			}
 		});
 	}
 

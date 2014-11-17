@@ -1,23 +1,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:drawable="@color/primaryPressed" android:state_pressed="true"/>
-    <item android:drawable="@color/primaryFocused" android:state_focused="true"/>
-    <item android:drawable="@color/primary"/>
-	<item android:state_pressed="true">
-	    <shape>
-	        <gradient android:endColor="@color/blue100" 
-	                  android:startColor="@color/blue100" />
-	    </shape>
-    </item>
-	<item android:state_focused="true">
-	    	<shape>
-        		<gradient android:endColor="@color/blue100" 
-        		          android:startColor="@color/blue100" />
-    		</shape>
-    </item>
-	<item>
-	    <shape>
-        	<gradient android:endColor="@color/trans" 
-        	    	  android:startColor="@color/trans" />
-    	</shape>
-    </item>
+	<item android:state_pressed="true"
+	      android:color="@color/darkYellow" />
+	<item android:state_focused="true"
+	      android:color="@color/darkYellow" />
+	<item android:color="#000000" />
 </selector>
