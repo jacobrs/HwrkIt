@@ -2,10 +2,14 @@ package com.jabs.hwrkit;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -17,6 +21,19 @@ public class LoginActivity extends ActionBarActivity {
 		ActionBar actionBar = getSupportActionBar();
 		getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); 
 		getSupportActionBar().setCustomView(R.layout.abs_login_layout);
+		
+		Button loginBtn = (Button) findViewById(R.id.username_sign_in_button);
+		
+		final Intent mainActivity = new Intent(this, MainActivity.class);
+		
+		loginBtn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(mainActivity);
+				finish();
+			}
+		});
 	}
 
 	@Override
