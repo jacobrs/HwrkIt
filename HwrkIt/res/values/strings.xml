@@ -19,5 +19,6 @@
     <string name="login_signup">Sign Up</string>
     <string name="register_back">Back</string>
     <string name="register_register">Register</string>
+    <string name="login_repassword_hint">Re-enter password</string>
 
 </resources>
