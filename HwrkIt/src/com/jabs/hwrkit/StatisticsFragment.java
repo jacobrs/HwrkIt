@@ -32,14 +32,38 @@ public class StatisticsFragment extends Fragment{
 		View ret = inflater.inflate(R.layout.fragment_statistics, container,
 				false);
 		
+		Bundle args = new Bundle();
+		double[] stats = new double[3];
+		// to check if bundle was sent or not
+		stats[0] = -1.0;
+		String className = "";
+		
+		if(args.containsKey("className")){
+			className = args.getString("className");
+		}
+		if(args.containsKey("stats")){
+			stats = args.getDoubleArray("stats");
+		}
+		
+		// bundle wasn't sent
+		if (stats[0] == -1.0){
+			stats[0] = 30.0;
+			stats[1] = 10.0;
+			stats[2] = 60.0;
+		}
+		
 		PieGraph pg = (PieGraph)ret.findViewById(R.id.graph);
 		PieSlice slice = new PieSlice();
 		slice.setColor(Color.parseColor("#99CC00"));
-		slice.setValue(50);
+		slice.setValue((float) stats[0]);
 		pg.addSlice(slice);
 		slice = new PieSlice();
 		slice.setColor(Color.parseColor("#D3D3D3"));
-		slice.setValue(50);
+		slice.setValue((float) stats[1]);
+		pg.addSlice(slice);
+		slice = new PieSlice();
+		slice.setColor(Color.parseColor("#FFFFFF"));
+		slice.setValue((float) stats[2]);
 		pg.addSlice(slice);
 		
 		pg.setInnerCircleRatio(200);
