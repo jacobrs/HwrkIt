@@ -49,7 +49,7 @@ public class HwrkTime {
 		return endTime.getTime() - startTime.getTime();
 	}
 	
-	public Class getClass(){
+	public Class getCourse(){
 		return parent;
 	}
 }
