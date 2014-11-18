@@ -6,7 +6,7 @@ import java.util.List;
 import com.jabs.adapters.ClassesAdapter;
 import com.jabs.structures.Class;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
