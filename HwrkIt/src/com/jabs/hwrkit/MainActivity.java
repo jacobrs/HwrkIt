@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jabs.adapters.ClassesAdapter;
+import com.jabs.structures.Class;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;

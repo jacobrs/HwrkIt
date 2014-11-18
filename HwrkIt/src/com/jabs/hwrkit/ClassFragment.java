@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jabs.adapters.ClassesAdapter;
-import com.jabs.structures.Course;
+import com.jabs.structures.Class;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,13 +28,13 @@ public class ClassFragment extends Fragment {
 		
 		View ret = inflater.inflate(R.layout.fragment_classes, container,
 				false);
-		final List<Course> classList = new ArrayList<Course>();
-		classList.add(new Course("English"));
-		classList.add(new Course("French"));
-		classList.add(new Course("Math"));
-		classList.add(new Course("Humanities"));
-		classList.add(new Course("Gym"));
-		classList.add(new Course("Physics"));
+		final List<Class> classList = new ArrayList<Class>();
+		classList.add(new Class("English"));
+		classList.add(new Class("French"));
+		classList.add(new Class("Math"));
+		classList.add(new Class("Humanities"));
+		classList.add(new Class("Gym"));
+		classList.add(new Class("Physics"));
 		
 		ListView list = (ListView) ret.findViewById(R.id.classList);
 		

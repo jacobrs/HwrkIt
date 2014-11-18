@@ -1,6 +1,6 @@
 package com.jabs.structures;
 
-import com.jabs.structures.Course;
+import com.jabs.structures.Class;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,15 +9,14 @@ import java.util.Locale;
 public class HwrkTime {
 	private Date startTime;
 	private Date endTime;
-	private Course parent;
+	private Class parent;
 	
-	public HwrkTime(Date startTime, Date endTime, Course parent){
+	public HwrkTime(Date startTime, Date endTime){
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.parent = parent;
 	}
 	
-	public HwrkTime(String start, String end, Course parent){
+	public HwrkTime(String start, String end, Class parent){
 		try {
 			startTime = new SimpleDateFormat("d/M/y h:m:s", Locale.ENGLISH).parse(start);
 			endTime = new SimpleDateFormat("d/M/y h:m:s", Locale.ENGLISH).parse(end);
@@ -50,7 +49,7 @@ public class HwrkTime {
 		return endTime.getTime() - startTime.getTime();
 	}
 	
-	public Course getCourse(){
-		return this.parent;
+	public Class getClass(){
+		return parent;
 	}
 }
