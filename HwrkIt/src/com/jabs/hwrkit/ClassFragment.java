@@ -54,10 +54,15 @@ public class ClassFragment extends Fragment {
 				passClass.putString("className", classList.get(position).getClassName());
 				// pass stats
 				
-				double stat1 = Math.random();
-				double stat2 = Math.random();
-				double stat3 = Math.random();
-				double[] stats = {stat1, stat2, stat3};
+				int Min = 0;
+				int Max = 100;
+				
+				double[] stats = new double[3];
+				for(int i = 0; i < 3; i++){
+					double stat = randomIntegerGenerator(Min, Max);
+					Max -= stat;
+					stats[i] = stat;
+				}
 				passClass.putDoubleArray("stats", stats);
 				
 				StatisticsFragment classStats = new StatisticsFragment();
@@ -73,5 +78,9 @@ public class ClassFragment extends Fragment {
 			
 		});
 		return ret;
+	}
+	
+	public int randomIntegerGenerator(int Min, int Max){
+		return Min+(int)(Math.random()*((Max-Min) + 1));
 	}
 }
