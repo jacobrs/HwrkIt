@@ -48,12 +48,12 @@
 	            android:id="@+id/login_errors"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
+	            android:lines="2"
 	            android:maxLines="2"
 	            android:gravity="center"
 	            android:padding="6dp"
 	            android:textColor="#FFFFFF" />
         </LinearLayout>
-
         <Button
             android:id="@+id/username_sign_in_button"
             android:layout_width="match_parent"

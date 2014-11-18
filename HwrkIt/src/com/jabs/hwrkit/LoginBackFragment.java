@@ -2,6 +2,7 @@ package com.jabs.hwrkit;
 
 import android.os.Bundle;
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.Animator.AnimatorListener;
@@ -104,51 +105,40 @@ public class LoginBackFragment extends Fragment {
  					
  					// Get the amount of lines
  					// and the size of our font
- 					int count = error.length() - error.replace("\n", "").length();
  					float fontSize = errorTxt.getTextSize();
- 					count++;
  					
  					// Calculate the amount we need to translate (animation)
- 					errorHeight = (int)fontSize*count;
+ 					errorHeight = (int)fontSize;
  					errorHeight += (int)errPaddingPx;
  					
- 					float target = initialY+errorHeight;
+ 					final float target = initialY+errorHeight;
  					
  					final ObjectAnimator translateY = ObjectAnimator.ofFloat(registerBtn, "y", registerBtn.getY(), target);
  					final ObjectAnimator scaleAlpha;
+ 					AnimatorSet set = new AnimatorSet();
+ 					final int halfTime;
  					if(errorLayout.getAlpha() > 0.5){
  						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 1.0f, 0.001f, 1.0f);
  						scaleAlpha.setDuration(1000);
+ 						halfTime = 500;
  					}else{
  						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 0.001f, 1.0f);
  						scaleAlpha.setDuration(500);
+ 						halfTime = 250;
  					}
  					translateY.setDuration(500);
- 		            translateY.addListener(new AnimatorListener(){
-						@Override
-						public void onAnimationStart(Animator animation) {
-							// TODO Auto-generated method stub
+ 					scaleAlpha.addUpdateListener(new AnimatorUpdateListener(){
+ 						boolean once = true;
+ 						@Override
+						public void onAnimationUpdate(ValueAnimator animation) {
+							if(animation.getCurrentPlayTime() > halfTime && once){
+								once = false;
+								errorTxt.setText(error);
+							}
 						}
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							// TODO Auto-generated method stub
-							errorTxt.setText(error);
-							scaleAlpha.start();
-						}
-						@Override
-						public void onAnimationCancel(Animator animation) {
-							// TODO Auto-generated method stub
-						}
-						@Override
-						public void onAnimationRepeat(Animator animation) {
-							// TODO Auto-generated method stub
-						}
- 		            });
- 		            if(!oldError.equals(error)){
- 		            	translateY.start();
- 		            }else{
- 		            	scaleAlpha.start();
- 		            }
+ 					});
+ 					set.playSequentially(translateY, scaleAlpha); 
+ 					set.start();
  				}else{
  					if(bError){
  						bError = false;

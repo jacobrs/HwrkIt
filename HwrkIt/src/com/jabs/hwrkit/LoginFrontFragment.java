@@ -6,18 +6,16 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -88,51 +86,40 @@ public class LoginFrontFragment extends Fragment {
  					error = error.substring(0, error.length() - 1);
  					// Get the amount of lines
  					// and the size of our font
- 					int count = error.length() - error.replace("\n", "").length();
  					float fontSize = errorTxt.getTextSize();
- 					count++;
  					
  					// Calculate the amount we need to translate (animation)
- 					errorHeight = (int)fontSize*count;
+ 					errorHeight = (int)fontSize;
  					errorHeight += (int)errPaddingPx;
  					
- 					float target = initialY+errorHeight;
+ 					final float target = initialY+errorHeight;
  					
  					final ObjectAnimator translateY = ObjectAnimator.ofFloat(loginBtn, "y", loginBtn.getY(), target);
  					final ObjectAnimator scaleAlpha;
+ 					AnimatorSet set = new AnimatorSet();
+ 					final int halfTime;
  					if(errorLayout.getAlpha() > 0.5){
  						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 1.0f, 0.001f, 1.0f);
  						scaleAlpha.setDuration(1000);
+ 						halfTime = 500;
  					}else{
  						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 0.001f, 1.0f);
  						scaleAlpha.setDuration(500);
+ 						halfTime = 250;
  					}
  					translateY.setDuration(500);
- 		            translateY.addListener(new AnimatorListener(){
-						@Override
-						public void onAnimationStart(Animator animation) {
-							// TODO Auto-generated method stub
+ 					scaleAlpha.addUpdateListener(new AnimatorUpdateListener(){
+ 						boolean once = true;
+ 						@Override
+						public void onAnimationUpdate(ValueAnimator animation) {
+							if(animation.getCurrentPlayTime() > halfTime && once){
+								once = false;
+								errorTxt.setText(error);
+							}
 						}
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							// TODO Auto-generated method stub
-							errorTxt.setText(error);
-							scaleAlpha.start();
-						}
-						@Override
-						public void onAnimationCancel(Animator animation) {
-							// TODO Auto-generated method stub
-						}
-						@Override
-						public void onAnimationRepeat(Animator animation) {
-							// TODO Auto-generated method stub
-						}
- 		            });
- 		            if(!oldError.equals(error)){
- 		            	translateY.start();
- 		            }else{
- 		            	scaleAlpha.start();
- 		            }
+ 					});
+ 					set.playSequentially(translateY, scaleAlpha); 
+ 					set.start();
  				}else{
  					startActivity(mainActivity);
  				}
