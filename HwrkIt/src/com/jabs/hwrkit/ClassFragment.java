@@ -17,10 +17,11 @@ public class ClassFragment extends Fragment {
 	public ClassFragment() {
 
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		View ret = inflater.inflate(R.layout.fragment_classes, container,
 				false);
 		List<Class> classList = new ArrayList<Class>();
