@@ -3,10 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/StatisticsType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Averages in some class" />
     
 	<com.echo.holographlibrary.PieGraph
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/graph"/>
+
+	<Spinner
+	    android:id="@+id/classSpinner"
+	    android:layout_width="175dp"
+	    android:layout_height="wrap_content" />
+
+	<TextView
+	    android:id="@+id/textView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Average week time"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Average day time"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Sample Text"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+	<com.echo.holographlibrary.LineGraph
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/lineGraph"/>
 
 </LinearLayout>

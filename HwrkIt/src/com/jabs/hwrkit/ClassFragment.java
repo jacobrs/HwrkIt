@@ -32,9 +32,9 @@ public class ClassFragment extends Fragment {
 		classList.add(new Class("Gym"));
 		classList.add(new Class("Physics"));
 		
-		ListView list = (ListView) ret.findViewById(R.id.list);
+		ListView list = (ListView) ret.findViewById(R.id.classList);
 		
-		ClassesAdapter adapter = new ClassesAdapter(this, classList);
+		ClassesAdapter adapter = new ClassesAdapter(this.getActivity(), classList);
 		list.setAdapter(adapter);
 		return ret;
 	}

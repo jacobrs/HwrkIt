@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="class_array">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Math</item>
+        <item>French</item>
+        <item>Science</item>
+        <item>Physics</item>
+        <item>Geography</item>
+        <item>Programming</item>
+    </string-array>
+</resources>

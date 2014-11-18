@@ -21,8 +21,8 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 	private final static int CLASSES_ROW_LAYOUT = R.layout.row_layout;
 	private List<Class> classList;
 	
-	public ClassesAdapter(ClassFragment classFragment, List<Class> classList){
-		super(classFragment.getActivity(), CLASSES_ROW_LAYOUT, classList);
+	public ClassesAdapter(Context context, List<Class> classList){
+		super(context, CLASSES_ROW_LAYOUT, classList);
 		this.classList = classList;
 	}
 
