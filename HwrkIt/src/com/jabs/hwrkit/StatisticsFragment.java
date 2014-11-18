@@ -21,6 +21,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class StatisticsFragment extends Fragment{
 	public StatisticsFragment() {
@@ -32,17 +33,18 @@ public class StatisticsFragment extends Fragment{
 		View ret = inflater.inflate(R.layout.fragment_statistics, container,
 				false);
 		
-		Bundle args = new Bundle();
+		Bundle args = this.getArguments();
 		double[] stats = new double[3];
 		// to check if bundle was sent or not
 		stats[0] = -1.0;
 		String className = "";
-		
-		if(args.containsKey("className")){
-			className = args.getString("className");
-		}
-		if(args.containsKey("stats")){
-			stats = args.getDoubleArray("stats");
+		if(args != null){
+			if(args.containsKey("className")){
+				className = args.getString("className");
+			}
+			if(args.containsKey("stats")){
+				stats = args.getDoubleArray("stats");
+			}
 		}
 		
 		// bundle wasn't sent
@@ -66,10 +68,18 @@ public class StatisticsFragment extends Fragment{
 		slice.setValue((float) stats[2]);
 		pg.addSlice(slice);
 		
+		Double tmp = stats[0];
+		Toast toast = Toast.makeText(getActivity(),
+				tmp.toString(), Toast.LENGTH_SHORT);
+				toast.show();
+		
 		pg.setInnerCircleRatio(200);
-		pg.setPadding(5);
-		for (PieSlice s : pg.getSlices())
-            s.setGoalValue((float)Math.random() * 10);
+		pg.setPadding(2);
+		for (PieSlice s : pg.getSlices()){
+			float old = s.getValue();
+			s.setValue((float)Math.random() * 10);
+            s.setGoalValue(old);
+		} 
         pg.setDuration(1000);//default if unspecified is 300 ms
         pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
         pg.animateToGoalValues();
