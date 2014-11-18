@@ -1,15 +1,15 @@
 package com.jabs.structures;
 
-public class Class {
+public class Course {
 	private String _className;
 	private int _resid;
 	// add students maybe
 	
-	public Class(String name){
+	public Course(String name){
 		this._className = name;
 	}
 	
-	public Class(String name, int artId){
+	public Course(String name, int artId){
 		this._className = name;
 		this._resid = artId;
 	}

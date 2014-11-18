@@ -9,7 +9,7 @@ import com.echo.holographlibrary.LinePoint;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.jabs.adapters.ClassesAdapter;
-import com.jabs.structures.Class;
+import com.jabs.structures.Course;
 
 import android.graphics.Color;
 import android.os.Bundle;

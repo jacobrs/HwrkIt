@@ -15,13 +15,13 @@ import com.jabs.hwrkit.ClassFragment;
 //import com.jabs.hwrkit.MainActivity;
 //import com.jabs.hwrkit.MainActivity.PlaceholderFragment;
 import com.jabs.hwrkit.R;
-import com.jabs.structures.Class;
+import com.jabs.structures.Course;
 
-public class ClassesAdapter extends ArrayAdapter<Class>{
+public class ClassesAdapter extends ArrayAdapter<Course>{
 	private final static int CLASSES_ROW_LAYOUT = R.layout.row_layout;
-	private List<Class> classList;
+	private List<Course> classList;
 	
-	public ClassesAdapter(Context context, List<Class> classList){
+	public ClassesAdapter(Context context, List<Course> classList){
 		super(context, CLASSES_ROW_LAYOUT, classList);
 		this.classList = classList;
 	}
@@ -39,7 +39,7 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		// populate the class list view
 		
 		// get the current class
-		Class curr = getItem(position);
+		Course curr = getItem(position);
 		
 		// get references to views on page
 		final TextView className = (TextView) rowView.findViewById(R.id.className);

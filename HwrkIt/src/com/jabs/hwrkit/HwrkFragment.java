@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 import com.jabs.adapters.ClassesAdapter;
 import com.jabs.adapters.HwrkAdapter;
+import com.jabs.structures.Course;
 import com.jabs.structures.HwrkTime;
-import com.jabs.structures.Class;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import android.widget.ListView;
 public class HwrkFragment extends Fragment {
 	private LinkedList<HwrkTime> times = null;
 	public HwrkFragment() {
-		Class tmp = new Class("Geometry");
+		Course tmp = new Course("Geometry");
 		times.add(new HwrkTime("18/11/14 12:30:00", "18/11/14 1:30:00", tmp));
 		times.add(new HwrkTime("18/11/14 6:30:00", "18/11/14 7:30:00", tmp));
 		times.add(new HwrkTime("18/11/14 8:30:00", "18/11/14 9:00:00", tmp));
