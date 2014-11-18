@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/username_login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <EditText
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" 
             android:background="@drawable/custom_login_error_layout"
-            android:layout_marginTop="15dp"
-            android:visibility="gone" >
+            android:layout_marginTop="15dp" 
+            android:alpha="0.0" >
             <TextView
 	            android:id="@+id/login_errors"
 	            android:layout_width="match_parent"
@@ -58,24 +58,23 @@
             android:id="@+id/username_sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:text="@string/login_login"
             android:background="@drawable/custom_login_button"
             android:textStyle="bold" />
+        <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent">
+	
+	        <TextView
+	            android:id="@+id/tvSignUp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentBottom="true"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/login_signup"
+	            android:background="@drawable/custom_login_text"
+	            android:clickable="true" />
+	
+	    </RelativeLayout>
     </LinearLayout>
-	<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tvSignUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/login_signup"
-            android:background="@drawable/custom_login_text"
-            android:clickable="true" />
-
-    </RelativeLayout>
 </LinearLayout>

@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/username_register_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <EditText
@@ -35,7 +35,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true" />
-		
+	    
         <EditText
             android:id="@+id/rsPassword"
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:orientation="vertical" 
             android:background="@drawable/custom_login_error_layout"
             android:layout_marginTop="15dp"
-            android:visibility="gone" >
+            android:alpha="0.0" >
             <TextView
 	            android:id="@+id/register_errors"
 	            android:layout_width="match_parent"
@@ -68,24 +68,22 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:text="@string/register_register"
             android:background="@drawable/custom_login_button"
             android:textStyle="bold" />
+        <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent">
+	
+	        <TextView
+	            android:id="@+id/tvBack"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentBottom="true"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/register_back"
+	            android:background="@drawable/custom_login_text"
+	            android:clickable="true" />
+    	</RelativeLayout>
     </LinearLayout>
-	<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tvBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/register_back"
-            android:background="@drawable/custom_login_text"
-            android:clickable="true" />
-
-    </RelativeLayout>
 </LinearLayout>

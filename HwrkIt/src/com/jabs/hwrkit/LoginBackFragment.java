@@ -1,6 +1,11 @@
 package com.jabs.hwrkit;
 
 import android.os.Bundle;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -28,8 +33,11 @@ public class LoginBackFragment extends Fragment {
 	int errorHeight;
 	Resources r;
 	Context prevCont;
-	boolean error;
-	int counter;
+	boolean bError;
+	boolean setOnce;
+	float initialY;
+	String oldError;
+	String error;
 	
 	public LoginBackFragment(LoginActivity cont){
 		prevCont = cont.getApplicationContext();
@@ -41,16 +49,16 @@ public class LoginBackFragment extends Fragment {
             Bundle savedInstanceState) {
         View ret = inflater.inflate(R.layout.activity_register, container, false);
 
-        error = false;
+        bError = false;
+        setOnce = true;
         
         r = getResources();
  		
  		// Get padding of our error layout
  		// change this if our layout padding is changed
+        final float registerBtnMarg = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics());
  		final float errPaddingPx = 2*TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, r.getDisplayMetrics());
  		final Context thisContext = prevCont;
- 		final Animation errorAnimation = AnimationUtils.loadAnimation(thisContext, R.animator.login_errors_animation);
- 		final Animation fixAnimation = AnimationUtils.loadAnimation(thisContext, R.animator.login_fix_animation);
  		
  		
  		final LinearLayout errorLayout = (LinearLayout) ret.findViewById(R.id.register_errors_layout);
@@ -62,14 +70,17 @@ public class LoginBackFragment extends Fragment {
         final EditText repasswordTxt = (EditText) ret.findViewById(R.id.rsPassword);
         usernameErr = "";
  		passwordErr = "";
-        counter = 0;
+ 		error = "";
+ 		oldError = "";
  		
         registerBtn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				if(setOnce){
+					setOnce = false;
+					initialY = registerBtn.getY();
+				}
 				// Get all possible errors
-				Log.d("Okay", ""+counter);
-				counter++;
  				usernameErr = getGenErrors("Username", usernameTxt);
  				passwordErr = getGenErrors("Password", passwordTxt);
  				
@@ -81,15 +92,15 @@ public class LoginBackFragment extends Fragment {
  				
  				// If we have errors
  				if(usernameErr != "" || passwordErr != ""){
- 					error = true;
- 					String error = "";
+ 					bError = true;
+ 					oldError = error;
+ 					error = "";
  					if(usernameErr != "")
  						error += usernameErr;
  					if(passwordErr != "")
  						error += passwordErr;
  					// Get rid of the last endline
  					error = error.substring(0, error.length() - 1);
- 					errorTxt.setText(error);
  					
  					// Get the amount of lines
  					// and the size of our font
@@ -101,30 +112,72 @@ public class LoginBackFragment extends Fragment {
  					errorHeight = (int)fontSize*count;
  					errorHeight += (int)errPaddingPx;
  					
- 					// Change the duration based off of login_error_animation.xml's duration
- 					// Change the -y to the height of the error container
- 					TranslateAnimation anim=new TranslateAnimation(0,0,-errorHeight,0);
- 			        anim.setFillAfter(true);
- 			        // Change this if anim/login_errors_animation's duration changes
- 			        anim.setDuration(500);
- 			        // Animate the button downwards
- 					registerBtn.setEnabled(true);
- 		            registerBtn.startAnimation(anim);
- 		            // Slide down the error layout (Change it from gone->invisible first)
- 		            errorLayout.setVisibility(1);
- 					errorLayout.startAnimation(errorAnimation);
+ 					float target = initialY+errorHeight;
+ 					
+ 					final ObjectAnimator translateY = ObjectAnimator.ofFloat(registerBtn, "y", registerBtn.getY(), target);
+ 					final ObjectAnimator scaleAlpha;
+ 					if(errorLayout.getAlpha() > 0.5){
+ 						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 1.0f, 0.001f, 1.0f);
+ 						scaleAlpha.setDuration(1000);
+ 					}else{
+ 						scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 0.001f, 1.0f);
+ 						scaleAlpha.setDuration(500);
+ 					}
+ 					translateY.setDuration(500);
+ 		            translateY.addListener(new AnimatorListener(){
+						@Override
+						public void onAnimationStart(Animator animation) {
+							// TODO Auto-generated method stub
+						}
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							// TODO Auto-generated method stub
+							errorTxt.setText(error);
+							scaleAlpha.start();
+						}
+						@Override
+						public void onAnimationCancel(Animator animation) {
+							// TODO Auto-generated method stub
+						}
+						@Override
+						public void onAnimationRepeat(Animator animation) {
+							// TODO Auto-generated method stub
+						}
+ 		            });
+ 		            if(!oldError.equals(error)){
+ 		            	translateY.start();
+ 		            }else{
+ 		            	scaleAlpha.start();
+ 		            }
  				}else{
- 					if(error){
- 						error = false;
-	 					TranslateAnimation anim=new TranslateAnimation(0,0,0,-errorHeight);
-	 			        anim.setFillAfter(true);
-	 			        // Change this if anim/login_errors_animation's duration changes
-	 			        anim.setDuration(500);
-	 			        // Animate the button upwards
-	 					registerBtn.setEnabled(true);
-	 		            registerBtn.startAnimation(anim);
-	 		            // Slide up the error layout
-	 					errorLayout.startAnimation(fixAnimation);
+ 					if(bError){
+ 						bError = false;
+ 						float target = initialY;
+ 	 					
+ 	 					final ObjectAnimator translateY = ObjectAnimator.ofFloat(registerBtn, "y", registerBtn.getY(), target);
+ 	 					final ObjectAnimator scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 1.0f,  0.001f);
+ 	 					translateY.setDuration(500);
+ 	 		            scaleAlpha.setDuration(500);
+ 	 		            scaleAlpha.addListener(new AnimatorListener(){
+ 							@Override
+ 							public void onAnimationStart(Animator animation) {
+ 								// TODO Auto-generated method stub
+ 							}
+ 							@Override
+ 							public void onAnimationEnd(Animator animation) {
+ 								// TODO Auto-generated method stub
+ 								translateY.start();
+ 							}
+ 							@Override
+ 							public void onAnimationCancel(Animator animation) {
+ 								// TODO Auto-generated method stub
+ 							}
+ 							@Override
+ 							public void onAnimationRepeat(Animator animation) {
+ 								// TODO Auto-generated method stub
+ 							}
+ 	 		            });
+ 	 		            scaleAlpha.start();
  					}
  					
  					// Toast here
