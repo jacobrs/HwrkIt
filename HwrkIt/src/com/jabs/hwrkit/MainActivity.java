@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity
 	        	fragment = new ClassFragment();
 	            break;
 	        case 2: 
+	        	fragment = new HwrkFragment();
 	            break;
 	        default : 
 	            break;
@@ -84,17 +85,6 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-                
-                /*FragmentManager fragmentManager = getSupportFragmentManager();
-                if(fragmentManager.getBackStackEntryCount()>0) {
-                    fragmentManager.beginTransaction().remove(fragmentManager.findFragmentById(fragmentManager.getBackStackEntryCount() - 1));
-                }
-                fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .add(R.id.container, new ClassFragment()).commit();*/
-                
-                //getFragmentManager().beginTransaction()
-				//.replace(R.id.container, new ClassFragment())
-				//.addToBackStack(null).commit();
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
