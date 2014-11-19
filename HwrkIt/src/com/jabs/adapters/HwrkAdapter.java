@@ -18,7 +18,7 @@ import com.jabs.structures.Class;
 import com.jabs.structures.HwrkTime;
 
 public class HwrkAdapter extends ArrayAdapter<HwrkTime>{
-	private final static int CLASSES_ROW_LAYOUT = R.layout.row_layout;
+	private final static int CLASSES_ROW_LAYOUT = R.layout.homework_row_layout;
 	private LinkedList<HwrkTime> times;
 	
 	public HwrkAdapter(Context context, LinkedList<HwrkTime> hwrkList){
@@ -43,9 +43,13 @@ public class HwrkAdapter extends ArrayAdapter<HwrkTime>{
 		
 		// get references to views on page
 		final TextView className = (TextView) rowView.findViewById(R.id.className);
+		final TextView timeSpent = (TextView) rowView.findViewById(R.id.timeSpent);
+		final TextView description = (TextView) rowView.findViewById(R.id.description);
 		
 		// set the text of the views
 		className.setText(curr.getCourse().getClassName());
+		timeSpent.setText(curr.getFormattedTimeSpent());
+		description.setText(curr.getDesc());
 		// do the artwork
 		return rowView;
 	}
