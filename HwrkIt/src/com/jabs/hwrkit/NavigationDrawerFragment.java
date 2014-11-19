@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -246,7 +247,10 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
+        if(item.getItemId() == R.id.action_settings){
+        	final Intent login = new Intent(getActivity(), LoginActivity.class);
+        	startActivity(login);
+        }
         return super.onOptionsItemSelected(item);
     }
 
