@@ -14,8 +14,8 @@ assignments/*.pdf
 *.dex
 
 # Generated files
-HwrkIt/bin/
-HwrkIt/gen/
+bin/
+gen/
 
 # Gradle files
 .gradle/

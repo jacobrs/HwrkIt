@@ -45,7 +45,7 @@ public class HwrkAdapter extends ArrayAdapter<HwrkTime>{
 		final TextView className = (TextView) rowView.findViewById(R.id.className);
 		
 		// set the text of the views
-		className.setText(curr.getClass().getClassName());
+		className.setText(curr.getCourse().getClassName());
 		// do the artwork
 		return rowView;
 	}
