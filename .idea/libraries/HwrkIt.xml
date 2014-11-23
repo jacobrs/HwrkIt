@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="HwrkIt">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/HwrkIt/gen" />
+      <root url="file://$PROJECT_DIR$/HwrkIt/src" />
+      <root url="file://$PROJECT_DIR$/Server/src/main/java" />
+      <root url="file://$PROJECT_DIR$/appcompat_v7/gen" />
+      <root url="file://$PROJECT_DIR$/HoloGraphLibrary/gen" />
+      <root url="file://$PROJECT_DIR$/HoloGraphLibrary/src" />
+    </SOURCES>
+  </library>
+</component>
