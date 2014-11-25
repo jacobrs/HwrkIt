@@ -1,0 +1,53 @@
+#!/usr/bin/bash
+
+# Some setup
+alias curl="curl -i"            # print the response headers 
+HOST=linux2-cs.johnabbott.qc.ca # use your hostname/IP (ex: linux2-cs)
+PORT=30000                      # use the port you configure in application.properties
+
+
+# Explore existing users
+curl -X GET http://$HOST:$PORT/
+curl -X GET http://$HOST:$PORT/Users
+curl -X GET http://$HOST:$PORT/Users/10
+
+# Create a new user (POST)
+curl -X POST -H "content-type:application/json" -d @- http://$HOST:$PORT/Users <<EOF
+{
+  "Email": "ian@clement.com",
+  "FirstName": "Ian",
+  "LastName": "Clement",
+  "UserType": "S"
+}
+EOF
+
+# Update an existing user (PATCH)
+curl -X PATCH -H "content-type:application/json" -d @- http://$HOST:$PORT/Users/1 <<EOF
+{
+  "UserType": "T"
+}
+EOF
+
+# Create a second user (POST)                                                          
+curl -X POST -H "content-type:application/json" -d @- http://$HOST:$PORT/Users <<EOF
+{                                                                                                                                                                                  
+  "Email": "alex@genio.com",  
+  "FirstName": "Alex",  
+  "LastName": "Genio",  
+  "UserType": "S"
+}
+EOF
+
+# Delete a user (Alex Genio)
+curl -X DELETE http://$HOST:$PORT/Users/2
+
+
+# Create a Class (many-to-one relationship)
+curl -X POST -H "content-type:application/json" -d @- http://$HOST:$PORT/Classes <<EOF
+{
+  "ClassName": "Oracle Technologies",
+  "TeacherID": "http://$HOST:$PORT/Users/1"
+}
+EOF
+
+
