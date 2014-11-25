@@ -23,7 +23,7 @@ public class Class {
 		return className;
 	}
 	
-	public void setTeacherID(String teacherID) {
+	public void setTeacherID(long teacherID) {
 		this.teacherID = teacherID;
 	}
 	
