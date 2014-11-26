@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "Users", path = "Users")
+@RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UsersRepository extends CrudRepository<User, Long> {
 
     List<User> findByLastName(@Param("name") String name);
