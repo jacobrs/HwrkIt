@@ -13,22 +13,22 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "UID")
+	@Column(name = "uid")
         private long id;
 
-	@Column(name="FirstName")
+	@Column(name="firstname")
 	private String firstName;
 	
-	@Column(name="LastName")
+	@Column(name="lastname")
 	private String lastName;
 	
-	@Column(name="Email")
+	@Column(name="email")
 	private String email;
 	
-	@Column(name="UserType")
+	@Column(name="usertype")
 	private String userType;
 	
-	@Column(name="Password")
+	@Column(name="password")
 	private String password;
 
 	public String getFirstName() {

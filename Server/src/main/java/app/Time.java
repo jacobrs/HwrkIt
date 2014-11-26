@@ -15,19 +15,19 @@ public class Time
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="HID")
+	@Column(name="hid")
 	private long id;
 
-	@Column(name="StartTime")
+	@Column(name="starttime")
 	private Date startTime;
 
-	@Column(name="EndTime")
+	@Column(name="endtime")
 	private Date endTime;
 
-	@Column(name="ClassID")
+	@Column(name="classid")
 	private long classID;
 
-	@Column(name="OwnerID")
+	@Column(name="ownerid")
 	private long ownerID;
 	
 	public void setStartTime(Date startTime) {
