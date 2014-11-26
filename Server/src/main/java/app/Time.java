@@ -13,28 +13,28 @@ import javax.persistence.Column;
 public class Time
 {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name="HID")
-        private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="HID")
+	private long id;
 
-        @Column(name="StartTime")
-        private Date startTime;
+	@Column(name="StartTime")
+	private Date startTime;
 
-        @Column(name="EndTime")
-        private Date endTime;
+	@Column(name="EndTime")
+	private Date endTime;
 
-        @Column(name="ClassID")
-        private long classID;
+	@Column(name="ClassID")
+	private long classID;
 
-        @Column(name="OwnerID")
-        private long ownerID;
+	@Column(name="OwnerID")
+	private long ownerID;
 	
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 	
-	public Date getClassName() {
+	public Date getStartTime() {
 		return startTime;
 	}
 	
