@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="Classes")
@@ -14,13 +15,15 @@ public class Class {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="cid")
+	@OneToMany(mappedBy="cid")
 	private long id;
 
 	@Column(name="classname")
 	private String className;
 
-	@Column(name="teacherid")
-	private long teacherID;
+	@ManyToOne
+	@JoinColumn(name="teacherid")
+	private User theTeacher;
 	
 	public void setClassName(String className) {
 		this.className = className;

@@ -14,7 +14,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "uid")
-        private long id;
+	@OneToMany(mappedBy="uid")
+    private long id;
 
 	@Column(name="firstname")
 	private String firstName;

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="Assignation")
@@ -17,11 +18,13 @@ public class Assignation
 	@Column(name="aid")
 	private long id;
 
-	@Column(name="userid")
-	private long userID;
+	@ManyToOne
+	@JoinColumn(name="userid")
+	private User theUser;
 
-	@Column(name="classid")
-	private long classID;
+	@ManyToOne
+	@JoinColumn(name="classid")
+	private Class theClass;
 	
 	public void setUserID(long userID) {
 		this.userID = userID;

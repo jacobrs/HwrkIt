@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="Time")
@@ -24,11 +25,13 @@ public class Time
 	@Column(name="endtime")
 	private Date endTime;
 
-	@Column(name="classid")
-	private long classID;
+	@ManyToOne
+	@JoinColumn(name="classid")
+	private Class theClass;
 
-	@Column(name="ownerid")
-	private long ownerID;
+	@ManyToOne
+	@JoinColumn(name="ownerid")
+	private User theOwner;
 	
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
