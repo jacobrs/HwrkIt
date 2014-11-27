@@ -34,11 +34,11 @@ public class Class {
 		return className;
 	}
 	
-	public void setTeacher(User teacher) {
+	public void setTheTeacher(User teacher) {
 		this.theTeacher = teacher;
 	}
 	
-	public User getTeacher() {
+	public User getTheTeacher() {
 		return theTeacher;
 	}
 }
