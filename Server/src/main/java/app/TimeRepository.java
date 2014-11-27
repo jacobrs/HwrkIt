@@ -6,10 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "times", path = "times")
+@RepositoryRestResource(collectionResourceRel = "time", path = "time")
 public interface TimeRepository extends CrudRepository<Time, Long> {
 
-    List<Time> findByClassID(@Param("id") long id);
-	List<Time> findByOwnerID(@Param("id") long id);
+    //List<Time> findByClass(@Param("class") Class course);
+	//List<Time> findByOwner(@Param("owner") User owner);
 	
 }

@@ -9,6 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "classes", path = "classes")
 public interface ClassRepository extends CrudRepository<Class, Long> {
 
-    List<Class> findByClassName(@Param("name") String name);
+    //List<Class> findByClassName(@Param("name") String name);
 
 }

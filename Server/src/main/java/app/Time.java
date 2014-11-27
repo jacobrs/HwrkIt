@@ -6,30 +6,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name="Time")
+@Table(name="time")
 public class Time
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="hid")
+    private long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="hid")
-	private long id;
+    @Column(name="startime")
+    private Date startTime;
 
-	@Column(name="starttime")
-	private Date startTime;
+    @Column(name="endtime")
+    private Date endTime;
 
-	@Column(name="endtime")
-	private Date endTime;
-
-	@ManyToOne
+   	@ManyToOne(targetEntity=Class.class)
 	@JoinColumn(name="classid")
-	private Class theClass;
+    private Class theClass;
 
-	@ManyToOne
+	@ManyToOne(targetEntity=User.class)
 	@JoinColumn(name="ownerid")
 	private User theOwner;
 	
@@ -37,7 +37,7 @@ public class Time
 		this.startTime = startTime;
 	}
 	
-	public Date getStartTime() {
+	public Date getClassName() {
 		return startTime;
 	}
 	
@@ -49,19 +49,19 @@ public class Time
 		return endTime;
 	}
 	
-	public void setClassID(long classID) {
-		this.classID = classID;
+	public void setCourse(Class course) {
+		this.theClass = course;
 	}
 	
-	public long getClassID() {
-		return classID;
+	public Class getClassID() {
+		return this.theClass;
 	}
 	
-	public void setOwnerID(long ownerID) {
-		this.ownerID = ownerID;
+	public void setOwner(User owner) {
+		this.theOwner = owner;
 	}
 	
-	public long getOwnerID() {
-		return ownerID;
+	public User getOwner() {
+		return this.theOwner;
 	}
 }

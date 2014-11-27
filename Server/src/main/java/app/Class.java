@@ -6,23 +6,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table(name="Classes")
+@Table(name="classes")
 public class Class {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="cid")
-	@OneToMany(mappedBy="cid")
+	//@OneToMany(mappedBy="theClass")
+	@Column(name="classid")
 	private long id;
 
 	@Column(name="classname")
 	private String className;
 
-	@ManyToOne
-	@JoinColumn(name="teacherid")
+	@ManyToOne(targetEntity=User.class)
+	@JoinColumn(name="teacherid", referencedColumnName="uid")
 	private User theTeacher;
 	
 	public void setClassName(String className) {
@@ -33,11 +34,11 @@ public class Class {
 		return className;
 	}
 	
-	public void setTeacherID(long teacherID) {
-		this.teacherID = teacherID;
+	public void setTeacher(User teacher) {
+		this.theTeacher = teacher;
 	}
 	
-	public long getTeacherID() {
-		return teacherID;
+	public User getTeacher() {
+		return theTeacher;
 	}
 }
