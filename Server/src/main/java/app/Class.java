@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name="classes")
@@ -25,19 +26,22 @@ public class Class {
 	@ManyToOne(targetEntity=User.class)
 	@JoinColumn(name="teacherid", referencedColumnName="uid")
 	private User theTeacher;
-	
+
+	@OneToMany(mappedBy="theClass")
+	private List<Time> times;
+
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	
+
 	public String getClassName() {
 		return className;
 	}
-	
+
 	public void setTheTeacher(User teacher) {
 		this.theTeacher = teacher;
 	}
-	
+
 	public User getTheTeacher() {
 		return theTeacher;
 	}

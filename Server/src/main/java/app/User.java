@@ -1,6 +1,6 @@
 package app;
 
-import java.util.Set;  
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -23,18 +24,21 @@ public class User {
 
 	@Column(name="firstname")
 	private String firstName;
-	
+
 	@Column(name="lastname")
 	private String lastName;
-	
+
 	@Column(name="email")
 	private String email;
-	
+
 	@Column(name="usertype")
 	private String userType;
-	
+
 	@Column(name="password")
 	private String password;
+
+	@OneToMany(mappedBy="theTeacher")
+	private List<Class> classes;
 
 	public String getFirstName() {
 		return firstName;
@@ -47,19 +51,19 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	
+
 	public String getUserType() {
 		return userType;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -67,7 +71,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}

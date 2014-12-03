@@ -27,19 +27,19 @@ public class Assignation
 	private Class theClass;
 	
 	
-	public void setUserID(User assignee) {
-		this.theUser = assignee;
+	public void setTheUser(User myUser) {
+		this.theUser = myUser;
 	}
 	
-	public User getUserID() {
+	public User getTheUser() {
 		return this.theUser;
 	}
 	
-	public void setClassID(Class course) {
-		this.theClass = course;
+	public void setTheClass(Class myClass) {
+		this.theClass = myClass;
 	}
 	
-	public Class getCourse() {
+	public Class getTheClass() {
 		return this.theClass;
 	}
 }

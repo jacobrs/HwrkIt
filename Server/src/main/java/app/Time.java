@@ -19,7 +19,7 @@ public class Time
     @Column(name="hid")
     private long id;
 
-    @Column(name="startime")
+    @Column(name="starttime")
     private Date startTime;
 
     @Column(name="endtime")
@@ -32,36 +32,36 @@ public class Time
 	@ManyToOne(targetEntity=User.class)
 	@JoinColumn(name="ownerid")
 	private User theOwner;
-	
+
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	
-	public Date getClassName() {
+
+	public Date getStartTime() {
 		return startTime;
 	}
-	
+
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	
+
 	public Date getEndTime() {
 		return endTime;
 	}
-	
-	public void setCourse(Class course) {
-		this.theClass = course;
+
+	public void setTheClass(Class theClass) {
+		this.theClass = theClass;
 	}
-	
-	public Class getClassID() {
+
+	public Class getTheClass() {
 		return this.theClass;
 	}
-	
-	public void setOwner(User owner) {
-		this.theOwner = owner;
+
+	public void setTheOwner(User theOwner) {
+		this.theOwner = theOwner;
 	}
-	
-	public User getOwner() {
+
+	public User getTheOwner() {
 		return this.theOwner;
 	}
 }
