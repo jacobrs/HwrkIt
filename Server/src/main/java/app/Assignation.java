@@ -25,20 +25,20 @@ public class Assignation
 	@ManyToOne(targetEntity=Class.class)
 	@JoinColumn(name="classid")
 	private Class theClass;
-	
-	
+
+
 	public void setTheUser(User myUser) {
 		this.theUser = myUser;
 	}
-	
+
 	public User getTheUser() {
 		return this.theUser;
 	}
-	
+
 	public void setTheClass(Class myClass) {
 		this.theClass = myClass;
 	}
-	
+
 	public Class getTheClass() {
 		return this.theClass;
 	}
