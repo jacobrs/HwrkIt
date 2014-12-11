@@ -12,17 +12,35 @@
         
         
     <LinearLayout
-        android:id="@+id/username_register_form"
+        android:id="@+id/email_register_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/rUsername"
+            android:id="@+id/rEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:hint="@string/login_username_hint"
+            android:hint="@string/login_email_hint"
+            android:maxLines="1"
+            android:singleLine="true" />
+        
+        <EditText
+            android:id="@+id/rFName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/login_fname_hint"
+            android:maxLines="1"
+            android:singleLine="true" />
+        
+        <EditText
+            android:id="@+id/rLName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/login_lname_hint"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -30,7 +48,7 @@
             android:id="@+id/rPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/login_password_hint"
             android:inputType="textPassword"
             android:maxLines="1"
@@ -40,7 +58,7 @@
             android:id="@+id/rsPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/login_repassword_hint"
             android:inputType="textPassword"
             android:maxLines="1"
@@ -58,7 +76,7 @@
 	            android:id="@+id/register_errors"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:lines="2"
+	            android:minLines="2"
 	            android:maxLines="2"
 	            android:gravity="center"
 	            android:padding="6dp"

@@ -8,7 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UsersRepository extends CrudRepository<User, Long> {
-
-    //List<User> findByUsername(@Param("uname") String uname);
-
+    List<User> findByEmail(@Param("email") String email);
 }

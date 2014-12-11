@@ -16,9 +16,6 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	//@OneToMany(mappedBy="theteacher")
-	//@OneToMany(mappedBy="theUser")
-	//@OneToMany(mappedBy="theOwner")
 	@Column(name = "uid")
     private long id;
 
