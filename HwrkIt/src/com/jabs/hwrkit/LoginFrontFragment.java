@@ -121,7 +121,9 @@ public class LoginFrontFragment extends Fragment {
  		signUpTxt.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				prevAct.flipCard();
+				if(!pauseListener){
+					prevAct.flipCard();
+				}
 			}
  		});
  		
