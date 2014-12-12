@@ -232,9 +232,9 @@ public class asyncLogin extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void v) {
+		LoginFrontFragment.setBtnText("Login");
 		// Bring the user to the new activity on success
 		if(success){
-			LoginFrontFragment.setBtnText("Login");
 			this.prevCont.startActivity(mainActivity);
 		}else{
 			// warn the user with a specific error

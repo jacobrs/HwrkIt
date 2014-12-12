@@ -39,6 +39,7 @@ public class LoginFrontFragment extends Fragment {
 	static Float errPaddingPx;
 	static Float initialY;
 	static int errorHeight;
+	static boolean pauseListener;
 	
 	// NORMAL GLOBAL VARIABLES
 	LoginActivity prevAct;
@@ -78,37 +79,41 @@ public class LoginFrontFragment extends Fragment {
  		final TextView signUpTxt = (TextView) ret.findViewById(R.id.tvSignUp);
  		passwordErr = "";
  		emailErr = "";
+ 		pauseListener = false;
  		// This stores all of the errors combined
  		error = "";
  		
  		loginBtn.setOnClickListener(new OnClickListener(){
  			@Override
  			public void onClick(View v) {
- 				// Set the starting position of the button once
- 				if(initialY == null){
- 					initialY = loginBtn.getY();
- 				}
- 				// Get all possible errors
- 				emailErr = getGenErrors("Email", emailTxt);
- 				passwordErr = getGenErrors("Password", passwordTxt);
- 				
- 				// If we have errors
- 				if(emailErr != "" || passwordErr != ""){
- 					error = "";
- 					if(emailErr != "")
- 						error += emailErr;
- 					if(passwordErr != "")
- 						error += passwordErr;
- 					// Get rid of the last endline
- 					error = error.substring(0, error.length() - 1);
- 					
- 					// Display the errors
- 					displayErrors(error);
- 				}else{
- 					// Check login info and create the static user
- 					loginBtn.setText("Loading...");
- 					User.Init(thisContext, editToText(emailTxt), editToText(passwordTxt));
- 				}
+ 				if(!pauseListener){
+	 				// Set the starting position of the button once
+	 				if(initialY == null){
+	 					initialY = loginBtn.getY();
+	 				}
+	 				// Get all possible errors
+	 				emailErr = getGenErrors("Email", emailTxt);
+	 				passwordErr = getGenErrors("Password", passwordTxt);
+	 				
+	 				// If we have errors
+	 				if(emailErr != "" || passwordErr != ""){
+	 					error = "";
+	 					if(emailErr != "")
+	 						error += emailErr;
+	 					if(passwordErr != "")
+	 						error += passwordErr;
+	 					// Get rid of the last endline
+	 					error = error.substring(0, error.length() - 1);
+	 					
+	 					// Display the errors
+	 					displayErrors(error);
+	 				}else{
+	 					// Check login info and create the static user
+	 					pauseListener = true;
+	 					loginBtn.setText("Loading...");
+	 					User.Init(thisContext, editToText(emailTxt), editToText(passwordTxt));
+	 				}
+	 			}
  			}
  		});
  		
@@ -195,6 +200,7 @@ public class LoginFrontFragment extends Fragment {
 	
 	public static void setBtnText(String text){
 		loginBtn.setText(text);
+		pauseListener = false;
 	}
 	
 	public static Fragment newInstance(LoginActivity cont) {

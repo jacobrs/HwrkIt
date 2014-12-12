@@ -88,8 +88,8 @@ public class asyncRegister extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void v) {
+		LoginBackFragment.setBtnText("Register");
 		if(success){
-			LoginBackFragment.setBtnText("Register");
 			// Let the user know everything went well
 			LoginBackFragment.displayErrors("Successfully created account", false);
 		}else{

@@ -39,6 +39,7 @@ public class LoginBackFragment extends Fragment {
 	static float errPaddingPx;
 	static float initialY;
 	static int errorHeight;
+	static boolean pauseListener;
 	
 	// NORMAL VARIABLES FOR NORMAL FUNCTIONS
 	LoginActivity prevAct;
@@ -80,6 +81,8 @@ public class LoginBackFragment extends Fragment {
         final EditText passwordTxt = (EditText) ret.findViewById(R.id.rPassword);
         final EditText repasswordTxt = (EditText) ret.findViewById(R.id.rsPassword);
         
+        pauseListener = false;
+        
         // This contains all of the errors put together
  		error = "";
 
@@ -87,33 +90,36 @@ public class LoginBackFragment extends Fragment {
         registerBtn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// Set the buttons initial position once
-				if(setOnce){
-					setOnce = false;
-					initialY = registerBtn.getY();
+				if(!pauseListener){
+					// Set the buttons initial position once
+					if(setOnce){
+						setOnce = false;
+						initialY = registerBtn.getY();
+					}
+					// Get all possible errors
+	 				Errors = getGenErrors(editToText(emailTxt), editToText(passwordTxt), 
+	 						editToText(fnameTxt), editToText(lnameTxt));
+	 				
+	 				// If none of the standard errors a valid then check
+	 				// that the passwords match
+	 				if(Errors == ""){
+	 					if(!passwordTxt.getText().toString().equals(repasswordTxt.getText().toString())){
+	 						Errors += "Passwords do not match";
+	 					}
+	 				}
+	 				
+	 				// If we have errors
+	 				if(Errors != ""){
+	 					// Display the errors
+	 					error = Errors;
+	 					displayErrors(error, true);
+	 				}else{
+	 					// Register the user
+	 					pauseListener = true;
+	 					registerBtn.setText("Loading...");
+	 					User.registerUser(editToText(emailTxt), editToText(passwordTxt), editToText(fnameTxt), editToText(lnameTxt));
+	 				}
 				}
-				// Get all possible errors
- 				Errors = getGenErrors(editToText(emailTxt), editToText(passwordTxt), 
- 						editToText(fnameTxt), editToText(lnameTxt));
- 				
- 				// If none of the standard errors a valid then check
- 				// that the passwords match
- 				if(Errors == ""){
- 					if(!passwordTxt.getText().toString().equals(repasswordTxt.getText().toString())){
- 						Errors += "Passwords do not match";
- 					}
- 				}
- 				
- 				// If we have errors
- 				if(Errors != ""){
- 					// Display the errors
- 					error = Errors;
- 					displayErrors(error, true);
- 				}else{
- 					// Register the user
- 					registerBtn.setText("Loading...");
- 					User.registerUser(editToText(emailTxt), editToText(passwordTxt), editToText(fnameTxt), editToText(lnameTxt));
- 				}
 			}
         });
         
@@ -232,6 +238,7 @@ public class LoginBackFragment extends Fragment {
     // is used for when a [async]task is finsihed)
     public static void setBtnText(String text){
     	registerBtn.setText(text);
+    	pauseListener = false;
     }
     
     // Creates a new instance of the back card
