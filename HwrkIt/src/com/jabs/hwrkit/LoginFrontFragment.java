@@ -1,7 +1,6 @@
 package com.jabs.hwrkit;
 
 import com.jabs.globals.User;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,25 +19,37 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/****************************************************************
+ * @author Benjamin Barault
+ * @last_modification_date: December 11th, 2014
+ * 
+ * @purpose:
+ * 
+ * 		This class simply displays the front of our login
+ * fragment, it also handles flipping to the back of our
+ * fragment. It has static functions which allow extenal
+ * classes to display errors on this view.
+ * 
+ ****************************************************************/
 public class LoginFrontFragment extends Fragment {
 	// STATIC VARIABLES FOR STATIC FUNCTIONS
-	static Button loginBtn;
 	static LinearLayout errorLayout;
 	static TextView errorTxt;
-	static int errorHeight;
-	static float errPaddingPx;
+	static Button loginBtn;
+	static Float errPaddingPx;
 	static Float initialY;
+	static int errorHeight;
 	
 	// NORMAL GLOBAL VARIABLES
-	String emailErr;
-	String passwordErr;
-	Resources r;
-	Context prevCont;
 	LoginActivity prevAct;
-	String oldError;
+	Context prevCont;
+	Resources r;
+	String passwordErr;
+	String emailErr;
 	String error;
 	
 	public LoginFrontFragment(LoginActivity cont){
+		// This is used to flip the card
 		prevCont = cont.getApplicationContext();
 		prevAct = cont;
 	}
@@ -65,24 +76,24 @@ public class LoginFrontFragment extends Fragment {
  		final EditText emailTxt = (EditText) ret.findViewById(R.id.email);
  		final EditText passwordTxt = (EditText) ret.findViewById(R.id.password);
  		final TextView signUpTxt = (TextView) ret.findViewById(R.id.tvSignUp);
- 		emailErr = "";
  		passwordErr = "";
- 		oldError = "";
+ 		emailErr = "";
+ 		// This stores all of the errors combined
  		error = "";
  		
  		loginBtn.setOnClickListener(new OnClickListener(){
  			@Override
  			public void onClick(View v) {
+ 				// Set the starting position of the button once
  				if(initialY == null){
  					initialY = loginBtn.getY();
  				}
  				// Get all possible errors
- 				emailErr = getGenErrors("Username", emailTxt);
+ 				emailErr = getGenErrors("Email", emailTxt);
  				passwordErr = getGenErrors("Password", passwordTxt);
  				
  				// If we have errors
  				if(emailErr != "" || passwordErr != ""){
- 					oldError = error;
  					error = "";
  					if(emailErr != "")
  						error += emailErr;
@@ -91,14 +102,17 @@ public class LoginFrontFragment extends Fragment {
  					// Get rid of the last endline
  					error = error.substring(0, error.length() - 1);
  					
+ 					// Display the errors
  					displayErrors(error);
  				}else{
  					// Check login info and create the static user
+ 					loginBtn.setText("Loading...");
  					User.Init(thisContext, editToText(emailTxt), editToText(passwordTxt));
  				}
  			}
  		});
  		
+ 		// Get click event for flipping cards
  		signUpTxt.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -110,6 +124,7 @@ public class LoginFrontFragment extends Fragment {
     }
 	
 	
+	// This returns general errors, things like empty variables
 	public String getGenErrors(String prepend, EditText field){
 		String error = "";
 		String eText = editToText(field);
@@ -121,11 +136,14 @@ public class LoginFrontFragment extends Fragment {
 		return error;
 	}
 	
-	public static Fragment newInstance(LoginActivity cont) {
-		LoginFrontFragment fragment = new LoginFrontFragment(cont);	
-        return fragment;
+	public String editToText(EditText theEdit){
+    	return theEdit.getText().toString();
     }
 	
+	// This function causes an animation that reveals
+	// our error layout and displays the error text passed
+	// into it. It can handle 2 errors at a time (the height
+	// of the layout)
 	public static Void displayErrors(final String errors){
 		// Call inner function of this class
 		// Get the amount of lines
@@ -134,14 +152,20 @@ public class LoginFrontFragment extends Fragment {
 		
 		// Calculate the amount we need to translate (animation)
 		errorHeight = (int)fontSize;
-		errorHeight += (int)errPaddingPx;
+		errorHeight += errPaddingPx.intValue();
 		
+		// Where we want the button to slide to
 		final float target = initialY+errorHeight;
 		
+		// Create both animations
 		final ObjectAnimator translateY = ObjectAnimator.ofFloat(loginBtn, "y", loginBtn.getY(), target);
 		final ObjectAnimator scaleAlpha;
+		// Prepare the animation set
 		AnimatorSet set = new AnimatorSet();
 		final int halfTime;
+		// Determine whether we need to fade it in or not
+		// NOTE: If the layout is revealed then it will fade out then
+		// 		 back in.
 		if(errorLayout.getAlpha() > 0.5){
 			scaleAlpha = ObjectAnimator.ofFloat(errorLayout, "alpha", 1.0f, 0.001f, 1.0f);
 			scaleAlpha.setDuration(1000);
@@ -152,22 +176,29 @@ public class LoginFrontFragment extends Fragment {
 			halfTime = 250;
 		}
 		translateY.setDuration(500);
+		// Prepare the animation's update listener
 		scaleAlpha.addUpdateListener(new AnimatorUpdateListener(){
 			boolean once = true;
 			@Override
-		public void onAnimationUpdate(ValueAnimator animation) {
-			if(animation.getCurrentPlayTime() > halfTime && once){
-				once = false;
-				errorTxt.setText(errors);
+			public void onAnimationUpdate(ValueAnimator animation) {
+				if(animation.getCurrentPlayTime() > halfTime && once){
+					once = false;
+					errorTxt.setText(errors);
+				}
 			}
-		}
 		});
-		set.playSequentially(translateY, scaleAlpha); 
+		// Play the set together
+		set.playTogether(translateY, scaleAlpha); 
 		set.start();
 		return null;
 	}
 	
-	public String editToText(EditText theEdit){
-    	return theEdit.getText().toString();
+	public static void setBtnText(String text){
+		loginBtn.setText(text);
+	}
+	
+	public static Fragment newInstance(LoginActivity cont) {
+		LoginFrontFragment fragment = new LoginFrontFragment(cont);	
+        return fragment;
     }
 }

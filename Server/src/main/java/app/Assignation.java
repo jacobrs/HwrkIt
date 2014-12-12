@@ -17,16 +17,15 @@ public class Assignation
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="aid")
 	private long id;
-
+	
 	@ManyToOne(targetEntity=User.class)
 	@JoinColumn(name="uid")
 	private User theUser;
 
 	@ManyToOne(targetEntity=Class.class)
-	@JoinColumn(name="classid")
+	@JoinColumn(name="classid", referencedColumnName="classid")
 	private Class theClass;
-
-
+	
 	public void setTheUser(User myUser) {
 		this.theUser = myUser;
 	}

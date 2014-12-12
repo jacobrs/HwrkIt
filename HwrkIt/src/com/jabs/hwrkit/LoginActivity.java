@@ -2,13 +2,21 @@ package com.jabs.hwrkit;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-
+/****************************************************************
+ * @author Benjamin Barault
+ * @last_modification_date: December 11th, 2014
+ * 
+ * @purpose:
+ * 
+ * 		This class handles both the front and back fragment
+ * for logging in and registering.
+ * 
+ ****************************************************************/
 public class LoginActivity extends ActionBarActivity {
 	private boolean mShowingBack;
 	
@@ -17,10 +25,12 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logres_frags);
         
+        // Show our custom action bar
         ActionBar actionBar = getSupportActionBar();
  		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); 
  		actionBar.setCustomView(R.layout.abs_login_layout);
         
+ 		// If this is the first time then set the defaults
         if (savedInstanceState == null) {
            mShowingBack = false;
            getFragmentManager()
@@ -30,6 +40,7 @@ public class LoginActivity extends ActionBarActivity {
         }
 	}
 	
+	// Create the menu
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.		
@@ -38,16 +49,21 @@ public class LoginActivity extends ActionBarActivity {
 		return true;
 	}
 
+	// Determine which menu item was selected
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
+		// int id = item.getItemId();
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// Flip the card and change the fragment view
 	public void flipCard() {
+		// If we're displaying the back then simply
+		// remove the back from our stack (animation
+		// will occur automatically)
 	    if (mShowingBack) {
 	    	mShowingBack = false;
 	        getFragmentManager().popBackStack();

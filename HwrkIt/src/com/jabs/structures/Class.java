@@ -1,9 +1,13 @@
 package com.jabs.structures;
 
+import java.util.ArrayList;
+
 public class Class {
 	private String _className;
 	private int _resid;
+	private ArrayList<HwrkTime> times = new ArrayList<HwrkTime>();
 	// add students maybe
+	// and maybe also the teacher
 	
 	public Class(String name){
 		this._className = name;
@@ -30,5 +34,12 @@ public class Class {
 		this._resid = resid;
 	}
 	
+	public void setTimes(ArrayList<HwrkTime> times){
+		this.times = times;
+	}
+	
+	public ArrayList<HwrkTime> getTimes(){
+		return this.times;
+	}
 	
 }

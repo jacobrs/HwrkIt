@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jabs.adapters.ClassesAdapter;
+import com.jabs.globals.User;
 import com.jabs.structures.Class;
+import com.jabs.structures.HwrkTime;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -14,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +50,21 @@ public class MainActivity extends ActionBarActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+        /*    TESTING SINGLTON, KEEP THIS FOR LATER ON WHEN WE HAVE
+         * 	  TO DO MORE TESTING
+        User theUser = User.getInstance();
+  		ArrayList<Class> hisClasses = theUser.getClasses();
+   		for(int i = 0; i < hisClasses.size(); i++){
+   			ArrayList<HwrkTime> classesTimes = hisClasses.get(i).getTimes();
+   			for(int j = 0; j < classesTimes.size(); j++){
+   				HwrkTime theTime = classesTimes.get(j);
+   				Log.d("START", theTime.getStartTime().toString());
+   				Log.d("END", theTime.getEndTime().toString());
+   			}
+   		}
+        */
+        
+        
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,

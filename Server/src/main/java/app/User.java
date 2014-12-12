@@ -36,7 +36,7 @@ public class User {
 
 	@OneToMany(mappedBy="theTeacher")
 	private List<Class> classes;
-
+	
 	public String getFirstName() {
 		return firstName;
 	}

@@ -8,8 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "assignations", path = "assignations")
 public interface AssignationRepository extends CrudRepository<Assignation, Long> {
-
-	//List<Time> findByUser(@Param("id") User owner);
-	//List<Time> findByClass(@Param("id") Class course);
-	
+	//Assignation findByUser(@Param("uid") int uid);
+	//List<Time> findByClass(@Param("id") Class course);	
 }
