@@ -13,7 +13,6 @@ import com.jabs.structures.Class;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,8 +41,7 @@ public class StatisticsFragment extends Fragment{
 			Bundle savedInstanceState) {
 		final View ret = inflater.inflate(R.layout.fragment_statistics, container,
 				false);
-        final PieGraph pg = (PieGraph) ret.findViewById(R.id.graph);
-        final LineGraph li = (LineGraph)ret.findViewById(R.id.lineGraph);
+
         final ArrayList<String> colors = new ArrayList(); //create some colors for pie chart
         colors.add("#E65100");
         colors.add("#F57C00");
@@ -76,14 +74,21 @@ public class StatisticsFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 ArrayList<HwrkTime> classTimes = allClasses.get(position);
-
+                PieGraph pg = (PieGraph) ret.findViewById(R.id.graph);
+                LineGraph li = (LineGraph)ret.findViewById(R.id.lineGraph);
+                TextView avgWeek = (TextView) ret.findViewById(R.id.avgWeek);
+                TextView totWeek = (TextView) ret.findViewById(R.id.totWeek);
+                TextView avgDay = (TextView) ret.findViewById(R.id.avgDay);
                 //PIE CHART
                 pg.removeSlices();
                 li.removeAllLines();
                 int i = 0;
                 float total = 0;
                 Line l = new Line();
-
+                LinePoint p = new LinePoint();
+                p.setX(0);
+                p.setY(0);
+                l.addPoint(p);
                 for (HwrkTime time : classTimes) {
                     PieSlice slice = new PieSlice();
                     slice.setColor(Color.parseColor(colors.get(i%colors.size()))); //get next color
@@ -95,8 +100,8 @@ public class StatisticsFragment extends Fragment{
 
                     // LINE GRAPH
 
-                    LinePoint p = new LinePoint();
-                    p.setX(i);
+                    p = new LinePoint();
+                    p.setX(i+1);
                     p.setY(time.getLengthSeconds()/60); //Minutes
                     l.addPoint(p);
                     i++;
@@ -115,25 +120,40 @@ public class StatisticsFragment extends Fragment{
                 }
 
                 TextView txtPercentage = (TextView) ret.findViewById(R.id.percentage);
-                txtPercentage.setText(new Integer((int)(total*100)).toString()+"% Completion");
+                txtPercentage.setText(new Integer((int)(total*100)).toString()+"%");
+
+                //Don't set animation on grey one
+                for (PieSlice s : pg.getSlices()){
+                    float old = s.getValue();
+                    s.setValue(0);
+                    s.setGoalValue(old);
+                }
+
                 if (total < 1){
                     PieSlice slice = new PieSlice();
                     slice.setColor(Color.parseColor(NO_COLOR)); //get next color
                     slice.setValue(1-total);
+                    slice.setGoalValue(1-total);
                     pg.addSlice(slice);
                 }
                 pg.setInnerCircleRatio(200);
                 pg.setPadding(2);
-                for (PieSlice s : pg.getSlices()){
-                    float old = s.getValue();
-                    s.setValue(5);
-                    s.setGoalValue(old);
-                }
+
                 pg.setDuration(1000);//default if unspecified is 300 ms
                 pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
                 pg.animateToGoalValues();
 
-
+                // Process stats
+                //Avg week
+                if (classTimes.size()!=0) {
+                    avgWeek.setText(new Float(getWeekTotal(classTimes) / classTimes.size() / 60).toString() + " average minutes this week");
+                    avgDay.setText(new Float(getDayTotal(classTimes) / classTimes.size() / 60).toString() + " average minutes today");
+                    totWeek.setText(new Float(getWeekTotal(classTimes) / 60).toString() + " total minutes this week");
+                }else {
+                    avgWeek.setText("0 average minutes this week");
+                    avgDay.setText("0 average minutes today");
+                    totWeek.setText("0 total minutes this week");
+                }
             }
 
 
@@ -151,10 +171,34 @@ public class StatisticsFragment extends Fragment{
 			stats[2] = 60.0;
 		}
 
-
-
-
-
 		return ret;
 	}
+
+    //get the total amount of time spent this week, in seconds
+    float getWeekTotal(ArrayList<HwrkTime> times) {
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        float total = 0;
+        Date lastWeek = new Date((System.currentTimeMillis() - (7 * DAY_IN_MS)));
+        ArrayList<HwrkTime> theWeekTimes = new ArrayList<HwrkTime>();
+        for (HwrkTime time: times){
+            if (time.getStartTime().getTime() > lastWeek.getTime()){
+                total += time.getLengthSeconds();
+            }
+        }
+        return total;
+    }
+
+    // get the total amount of time spent today, in seconds
+    float getDayTotal(ArrayList<HwrkTime> times) {
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        float total = 0;
+        Date yesterday = new Date((System.currentTimeMillis() - (DAY_IN_MS)));
+        ArrayList<HwrkTime> theDayTimes = new ArrayList<HwrkTime>();
+        for (HwrkTime time: times){
+            if (time.getStartTime().getTime() > yesterday.getTime()){
+                total += time.getLengthSeconds();
+            }
+        }
+        return total;
+    }
 }

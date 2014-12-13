@@ -8,39 +8,60 @@
         android:id="@+id/StatisticsType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Averages in some class" />
-    
-	<com.echo.holographlibrary.PieGraph
+        android:text="Hours this week"
+        android:layout_gravity="center_horizontal" />
+
+
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <com.echo.holographlibrary.PieGraph
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:scaleY="-1"
+        android:scaleX="-1"
         android:id="@+id/graph"/>
-
+    <TextView
+        android:id="@+id/percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="40dp"
+        android:layout_gravity="center"
+        android:text="PCT" />
+</FrameLayout>
 	<Spinner
 	    android:id="@+id/classSpinner"
 	    android:layout_width="175dp"
-	    android:layout_height="wrap_content" />
+	    android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textAppearance="?android:attr/textAppearanceLarge" />/>
 
+    <TextView
+        android:id="@+id/totWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total week time"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 	<TextView
-	    android:id="@+id/textView1"
+	    android:id="@+id/avgWeek"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="Average week time"
 	    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<TextView
-	    android:id="@+id/textView2"
+	    android:id="@+id/avgDay"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="Average day time"
 	    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-	<TextView
-	    android:id="@+id/percentage"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Sample Text"
-	    android:textAppearance="?android:attr/textAppearanceLarge" />
-	<com.echo.holographlibrary.LineGraph
+    <com.echo.holographlibrary.LineGraph
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/lineGraph"/>
