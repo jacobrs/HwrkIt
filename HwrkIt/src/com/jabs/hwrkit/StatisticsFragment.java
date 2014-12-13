@@ -25,6 +25,7 @@ import android.widget.TextView;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 
 public class StatisticsFragment extends Fragment{
@@ -34,14 +35,13 @@ public class StatisticsFragment extends Fragment{
 
     // This should be changed for the user to customize it. Need to add to DB
     float SUGGESTED_HOURS = 3 * 60 * 60; //Suggested amount of hours per course (course outline), in seconds
-    HashMap<Integer, ArrayList<HwrkTime>> allClasses = new HashMap<Integer, ArrayList<HwrkTime>>();
-
+    private HashMap<Integer, ArrayList<HwrkTime>> allClasses = new HashMap<Integer, ArrayList<HwrkTime>>();
+    private LinkedList<HwrkTime> hwrkTimes = new LinkedList<HwrkTime>();
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		final View ret = inflater.inflate(R.layout.fragment_statistics, container,
 				false);
-
         final ArrayList<String> colors = new ArrayList(); //create some colors for pie chart
         colors.add("#E65100");
         colors.add("#F57C00");
@@ -55,11 +55,6 @@ public class StatisticsFragment extends Fragment{
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-
-        Bundle args = this.getArguments();
-        double[] stats = new double[3];
-        // to check if bundle was sent or not
-        stats[0] = -1.0;
 
         // populate spinner with classnames, create light statistics data
         ArrayList<Class> hisClasses = theUser.getClasses();
@@ -79,6 +74,7 @@ public class StatisticsFragment extends Fragment{
                 TextView avgWeek = (TextView) ret.findViewById(R.id.avgWeek);
                 TextView totWeek = (TextView) ret.findViewById(R.id.totWeek);
                 TextView avgDay = (TextView) ret.findViewById(R.id.avgDay);
+
                 //PIE CHART
                 pg.removeSlices();
                 li.removeAllLines();
@@ -91,11 +87,11 @@ public class StatisticsFragment extends Fragment{
                 l.addPoint(p);
                 classTimes = getTimesOverRange(classTimes, 7); //get class times in last 7 days
                 for (HwrkTime time : classTimes) {
+                    //Pie chart
                     PieSlice slice = new PieSlice();
                     slice.setColor(Color.parseColor(colors.get(i%colors.size()))); //get next color
                     float percentage = (float) time.getLengthSeconds() / SUGGESTED_HOURS; //percentage completed of those hours
                     total+=percentage;
-                    System.out.println("Time "+new Integer(i).toString()+": "+time.getFormattedTimeSpent());
                     slice.setValue(percentage);
                     pg.addSlice(slice);
 
@@ -164,13 +160,6 @@ public class StatisticsFragment extends Fragment{
             }
 
         });
-		
-		// bundle wasn't sent
-		if (stats[0] == -1.0){
-			stats[0] = 30.0;
-			stats[1] = 10.0;
-			stats[2] = 60.0;
-		}
 
 		return ret;
 	}

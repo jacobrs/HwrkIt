@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/StatisticsType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hours this week/Recommended 3 hours"
-        android:layout_gravity="center_horizontal" />
-
-
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
-
-    <com.echo.holographlibrary.PieGraph
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleY="-1"
-        android:scaleX="-1"
-        android:id="@+id/graph"/>
-    <TextView
-        android:id="@+id/percentage"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/StatisticsType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hours this week/Recommended 3 hours"
+            android:layout_gravity="center_horizontal" />
+
+
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="40dp"
-        android:layout_gravity="center"
-        android:text="PCT" />
-</FrameLayout>
-	<Spinner
-	    android:id="@+id/classSpinner"
-	    android:layout_width="175dp"
-	    android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:textAppearance="?android:attr/textAppearanceLarge" />/>
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/totWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total week time"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-	<TextView
-	    android:id="@+id/avgWeek"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Average week time"
-	    android:textAppearance="?android:attr/textAppearanceLarge" />
+        <com.echo.holographlibrary.PieGraph
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleY="-1"
+            android:scaleX="-1"
+            android:id="@+id/graph"/>
+        <TextView
+            android:id="@+id/percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="40dp"
+            android:layout_gravity="center"
+            android:text="PCT" />
+    </FrameLayout>
+        <Spinner
+            android:id="@+id/classSpinner"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge" />/>
 
-	<TextView
-	    android:id="@+id/avgDay"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Average day time"
-	    android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/totWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total week time"
+            android:paddingLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/avgWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average week time"
+            android:paddingLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <com.echo.holographlibrary.LineGraph
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/lineGraph"/>
+        <TextView
+            android:id="@+id/avgDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average day time"
+            android:paddingLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</LinearLayout>
+        <com.echo.holographlibrary.LineGraph
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/lineGraph"/>
+
+        </LinearLayout>
+</ScrollView>
