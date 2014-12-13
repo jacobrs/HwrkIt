@@ -13,6 +13,7 @@ import com.jabs.structures.Class;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class StatisticsFragment extends Fragment{
         colors.add("#FB8C00");
         colors.add("#FFE0B2");
         final String NO_COLOR = "#C0C0C0"; //Where no data is on chart
+
         User theUser = User.getInstance();
 
         Spinner spinner = (Spinner) ret.findViewById(R.id.classSpinner);
@@ -57,7 +59,7 @@ public class StatisticsFragment extends Fragment{
         spinner.setAdapter(spinnerAdapter);
 
         // populate spinner with classnames, create light statistics data
-        ArrayList<Class> hisClasses = theUser.getClasses();
+        final ArrayList<Class> hisClasses = theUser.getClasses();
         for(int i = 0; i < hisClasses.size(); i++){
             spinnerAdapter.add(hisClasses.get(i).getClassName());
             allClasses.put(i, hisClasses.get(i).getTimes());  // get all times for that class
