@@ -76,7 +76,7 @@ public class StatisticsFragment extends Fragment{
                 TextView avgWeek = (TextView) ret.findViewById(R.id.avgWeek);
                 TextView totWeek = (TextView) ret.findViewById(R.id.totWeek);
                 TextView avgDay = (TextView) ret.findViewById(R.id.avgDay);
-
+                TextView txtMaxY = (TextView) ret.findViewById(R.id.txtMaxY);
                 //PIE CHART
                 pg.removeSlices();
                 li.removeAllLines();
@@ -113,9 +113,11 @@ public class StatisticsFragment extends Fragment{
                 li.setLineToFill(0);
                 if (total<1){
                     li.setRangeY(0, SUGGESTED_HOURS/60);
+                    txtMaxY.setText(new Float(SUGGESTED_HOURS/60).toString());
                 }
                 else{
                     li.setRangeY(0,li.getMaxY()+10);
+                    txtMaxY.setText(new Float(li.getMaxY()+10).toString());
                 }
 
                 TextView txtPercentage = (TextView) ret.findViewById(R.id.percentage);
