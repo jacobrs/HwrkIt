@@ -89,6 +89,7 @@ public class StatisticsFragment extends Fragment{
                 p.setX(0);
                 p.setY(0);
                 l.addPoint(p);
+                classTimes = getTimesOverRange(classTimes, 7); //get class times in last 7 days
                 for (HwrkTime time : classTimes) {
                     PieSlice slice = new PieSlice();
                     slice.setColor(Color.parseColor(colors.get(i%colors.size()))); //get next color
@@ -146,9 +147,9 @@ public class StatisticsFragment extends Fragment{
                 // Process stats
                 //Avg week
                 if (classTimes.size()!=0) {
-                    avgWeek.setText(new Float(getWeekTotal(classTimes) / classTimes.size() / 60).toString() + " average minutes this week");
-                    avgDay.setText(new Float(getDayTotal(classTimes) / classTimes.size() / 60).toString() + " average minutes today");
-                    totWeek.setText(new Float(getWeekTotal(classTimes) / 60).toString() + " total minutes this week");
+                    avgWeek.setText(new Float(getTimesTotal(classTimes, 7) / classTimes.size() / 60).toString() + " average minutes this week");
+                    avgDay.setText(new Float(getTimesTotal(classTimes,1) / classTimes.size() / 60).toString() + " average minutes today");
+                    totWeek.setText(new Float(getTimesTotal(classTimes, 7) / 60).toString() + " total minutes this week");
                 }else {
                     avgWeek.setText("0 average minutes this week");
                     avgDay.setText("0 average minutes today");
@@ -174,31 +175,31 @@ public class StatisticsFragment extends Fragment{
 		return ret;
 	}
 
-    //get the total amount of time spent this week, in seconds
-    float getWeekTotal(ArrayList<HwrkTime> times) {
+    //get the total amount of time spent over a duration, in seconds
+    float getTimesTotal(ArrayList<HwrkTime> times, int duration) {
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
         float total = 0;
-        Date lastWeek = new Date((System.currentTimeMillis() - (7 * DAY_IN_MS)));
-        ArrayList<HwrkTime> theWeekTimes = new ArrayList<HwrkTime>();
+        Date dateRange = new Date((System.currentTimeMillis() - (duration * DAY_IN_MS)));
+        ArrayList<HwrkTime> theTimes = new ArrayList<HwrkTime>();
         for (HwrkTime time: times){
-            if (time.getStartTime().getTime() > lastWeek.getTime()){
+            if (time.getStartTime().getTime() > dateRange.getTime()){
                 total += time.getLengthSeconds();
             }
         }
         return total;
+    }
+    //returns a list of times within time range
+    ArrayList<HwrkTime> getTimesOverRange(ArrayList<HwrkTime> times, int duration){
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        ArrayList<HwrkTime> rangeTimes = new ArrayList<HwrkTime>();
+        Date dateRange = new Date((System.currentTimeMillis() - (duration * DAY_IN_MS)));
+        ArrayList<HwrkTime> theTimes = new ArrayList<HwrkTime>();
+        for (HwrkTime time: times){
+            if (time.getStartTime().getTime() > dateRange.getTime()){
+                rangeTimes.add(time);
+            }
+        }
+        return rangeTimes;
     }
 
-    // get the total amount of time spent today, in seconds
-    float getDayTotal(ArrayList<HwrkTime> times) {
-        long DAY_IN_MS = 1000 * 60 * 60 * 24;
-        float total = 0;
-        Date yesterday = new Date((System.currentTimeMillis() - (DAY_IN_MS)));
-        ArrayList<HwrkTime> theDayTimes = new ArrayList<HwrkTime>();
-        for (HwrkTime time: times){
-            if (time.getStartTime().getTime() > yesterday.getTime()){
-                total += time.getLengthSeconds();
-            }
-        }
-        return total;
-    }
 }

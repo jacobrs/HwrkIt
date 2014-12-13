@@ -8,7 +8,7 @@
         android:id="@+id/StatisticsType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hours this week"
+        android:text="Hours this week/Recommended 3 hours"
         android:layout_gravity="center_horizontal" />
 
 
