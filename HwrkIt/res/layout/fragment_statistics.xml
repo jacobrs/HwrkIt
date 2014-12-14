@@ -77,50 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="125dp">
 
-                <com.echo.holographlibrary.LineGraph
-                android:layout_width="wrap_content"
-                android:layout_height="110dp"
-                android:id="@+id/lineGraph"/>
-
-                <TextView
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Mins."
-                    android:id="@+id/txtHoursLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotation="270"
-                    android:layout_centerVertical="true"
-                    android:layout_alignRight="@+id/txtMaxY"
-                    android:layout_alignEnd="@+id/txtMaxY" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="1"
-                    android:id="@+id/txtMaxY"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
-                    android:id="@+id/txtMinY"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Hwrk Time"
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
+                <com.echo.holographlibrary.BarGraph
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/barGraph"/>
 
             </RelativeLayout>
 

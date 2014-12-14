@@ -1,6 +1,8 @@
 package com.jabs.hwrkit;
 
 
+import com.echo.holographlibrary.Bar;
+import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.Line;
 import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
@@ -72,14 +74,12 @@ public class StatisticsFragment extends Fragment{
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 ArrayList<HwrkTime> classTimes = allClasses.get(position);
                 PieGraph pg = (PieGraph) ret.findViewById(R.id.graph);
-                LineGraph li = (LineGraph)ret.findViewById(R.id.lineGraph);
+                BarGraph barGraph = (BarGraph)ret.findViewById(R.id.barGraph);
                 TextView avgWeek = (TextView) ret.findViewById(R.id.avgWeek);
                 TextView totWeek = (TextView) ret.findViewById(R.id.totWeek);
                 TextView avgDay = (TextView) ret.findViewById(R.id.avgDay);
-                TextView txtMaxY = (TextView) ret.findViewById(R.id.txtMaxY);
                 //PIE CHART
                 pg.removeSlices();
-                li.removeAllLines();
                 int i = 0;
                 float total = 0;
                 Line l = new Line();
@@ -88,6 +88,7 @@ public class StatisticsFragment extends Fragment{
                 p.setY(0);
                 l.addPoint(p);
                 classTimes = getTimesOverRange(classTimes, 7); //get class times in last 7 days
+                ArrayList<Bar> points = new ArrayList<Bar>();
                 for (HwrkTime time : classTimes) {
                     //Pie chart
                     PieSlice slice = new PieSlice();
@@ -99,26 +100,20 @@ public class StatisticsFragment extends Fragment{
 
                     // LINE GRAPH
 
+                    Bar d = new Bar();
+                    d.setColor(Color.parseColor(colors.get(i%colors.size())));
+                    d.setName(time.getFormattedTimeSpent());
+                    d.setValue(time.getLengthSeconds() /60); //minutes
+                    points.add(d);
+
+
                     p = new LinePoint();
                     p.setX(i+1);
                     p.setY(time.getLengthSeconds()/60); //Minutes
                     l.addPoint(p);
                     i++;
                 }
-                l.setColor(Color.parseColor("#FFBB33"));
-                li.addLine(l);
-                li.setRangeX(0, li.getMaxX());
-                System.out.print(li.getMaxY()+10);
-
-                li.setLineToFill(0);
-                if (total<1){
-                    li.setRangeY(0, SUGGESTED_HOURS/60);
-                    txtMaxY.setText(new Float(SUGGESTED_HOURS/60).toString());
-                }
-                else{
-                    li.setRangeY(0,li.getMaxY()+10);
-                    txtMaxY.setText(new Float(li.getMaxY()+10).toString());
-                }
+                barGraph.setBars(points);
 
                 TextView txtPercentage = (TextView) ret.findViewById(R.id.percentage);
                 txtPercentage.setText(new Integer((int)(total*100)).toString()+"%");
