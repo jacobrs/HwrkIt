@@ -1,9 +1,12 @@
 package com.jabs.adapters;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +19,12 @@ import com.jabs.hwrkit.ClassFragment;
 //import com.jabs.hwrkit.MainActivity.PlaceholderFragment;
 import com.jabs.hwrkit.R;
 import com.jabs.structures.Class;
+import com.jabs.structures.LetterAvatar;
 
 public class ClassesAdapter extends ArrayAdapter<Class>{
 	private final static int CLASSES_ROW_LAYOUT = R.layout.row_layout;
 	private List<Class> classList;
+	private int color = Color.parseColor("#0066cc");
 	
 	public ClassesAdapter(Context context, List<Class> classList){
 		super(context, CLASSES_ROW_LAYOUT, classList);
@@ -47,6 +52,17 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		
 		// set the text of the views
 		className.setText(curr.getClassName());
+		int color;
+		
+		// if color has been set
+		if(curr.getColor() != 0){
+			color = curr.getColor();
+		}else{
+			// default is blue
+			color = Color.YELLOW;  
+		}
+		artwork.setImageDrawable(new LetterAvatar(artwork.getContext(), color, curr.getClassName().substring(0,1), 7));
+		
 		// do the artwork
 		return rowView;
 	}
