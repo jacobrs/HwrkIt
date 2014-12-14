@@ -42,6 +42,7 @@ import android.os.AsyncTask;
  * 
  ****************************************************************/
 public class asyncLogin extends AsyncTask<String, Void, Void> {
+	private int userID;
 	private String email;
 	private String firstName;
 	private String lastName;
@@ -110,6 +111,7 @@ public class asyncLogin extends AsyncTask<String, Void, Void> {
 						href = linksSelf.getString("href");
 						String[] splitHref = href.split("/");
 						href = splitHref[splitHref.length-1];
+						userID = Integer.parseInt(href);
 						// Check if the user supplied a proper password
 						if(BCrypt.checkpw(this.password, password)){
 							success = true;
@@ -205,6 +207,7 @@ public class asyncLogin extends AsyncTask<String, Void, Void> {
 						User mainUser = User.getInstance();
 						mainUser.setClasses(allTheClasses);
 						// Add other information too
+						mainUser.setID(userID);
 						mainUser.setEmail(email);
 						mainUser.setName(firstName, lastName);
 						mainUser.setUserType(userType);
