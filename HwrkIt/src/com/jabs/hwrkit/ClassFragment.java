@@ -99,7 +99,6 @@ public class ClassFragment extends Fragment {
 							EditText className = (EditText) dialogView.findViewById(R.id.className);
 							
 							if(className.length() > 0){
-								Toast.makeText(getActivity(), "Add classes", Toast.LENGTH_SHORT).show();
 								
 								// get random color
 								int nameLength = className.getText().length();
