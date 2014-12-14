@@ -39,6 +39,10 @@ public class User {
 		return instance;
 	}
 	
+	public static void deleteInstance(){
+		instance = null;
+	}
+	
 	// Asynchronously log a user in, the context is needed to start a new activity
 	public static Void checkLogin(String email, String password, Context theContext){
 		// Check the login here and fetch the results if it's good
@@ -59,13 +63,13 @@ public class User {
 	}
 	
 	// Asynchronously register a class
-		public static Void registerClass(String className, int userID){
-			String url = "http://linux2-cs.johnabbott.qc.ca:30000/classes";
-			// Async request
-			asyncCreateClass doCreate = new asyncCreateClass(className, userID);
-			doCreate.execute(url);
-			return null;
-		}
+	public static Void registerClass(String className, int userID){
+		String url = "http://linux2-cs.johnabbott.qc.ca:30000/classes";
+		// Async request
+		asyncCreateClass doCreate = new asyncCreateClass(className, userID);
+		doCreate.execute(url);
+		return null;
+	}
 	
 	// Body of the User class
 	private int userID;
