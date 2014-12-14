@@ -35,8 +35,17 @@
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:textSize="40dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:text="No completion %" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/status"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_trending_neutral_24px" />
     </FrameLayout>
         <Spinner
             android:id="@+id/classSpinner"
