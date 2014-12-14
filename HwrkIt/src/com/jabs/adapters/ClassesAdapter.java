@@ -59,7 +59,7 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 			color = curr.getColor();
 		}else{
 			// default is blue
-			color = Color.YELLOW;  
+			color = Color.parseColor("#FDD835");  
 		}
 		artwork.setImageDrawable(new LetterAvatar(artwork.getContext(), color, curr.getClassName().substring(0,1), 7));
 		

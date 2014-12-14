@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,30 +29,37 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ClassFragment extends Fragment {
+	
+	public static Boolean classExists;
+	private static List<Class> classList;
+	private static int[] colorArray = {Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA,
+			  Color.RED, Color.YELLOW};
+	private static ClassesAdapter adapter;
+	private static View ret;
+	
 	public ClassFragment() {
-
+		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View ret = inflater.inflate(R.layout.fragment_classes, container,
+		ret = inflater.inflate(R.layout.fragment_classes, container,
 				false);
 		
+		classExists = false;
 		// get instance of singleton
 		User theUser = User.getInstance();
 		
 		// get the classes belonging to the user
-		final List<Class> classList = theUser.getClasses();
-		final int[] colorArray = {Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA,
-								  Color.RED, Color.YELLOW}; 
+		classList = theUser.getClasses();
 		// get resources
 		ListView list = (ListView) ret.findViewById(R.id.classList);
 		Button addClasses = (Button) ret.findViewById(R.id.addClass);
 		
 		// set the adapter for classes listview
-		ClassesAdapter adapter = new ClassesAdapter(this.getActivity(), classList);
+		adapter = new ClassesAdapter(this.getActivity(), classList);
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(new OnItemClickListener(){
 
@@ -100,17 +108,9 @@ public class ClassFragment extends Fragment {
 							
 							if(className.length() > 0){
 								
-								// get random color
-								int nameLength = className.getText().length();
-								int arrayLength = colorArray.length;
-								int color = colorArray[arrayLength%nameLength];
-								
-								//add the class to the list
-								Class newClass = new Class(className.getText().toString(), color);
-								classList.add(newClass);
-								
 								//add the class to the db
-								
+								User.registerClass(className.getText().toString(), User.getInstance().getID());
+
 							}else{
 								Toast.makeText(getActivity(), "Empty", Toast.LENGTH_SHORT).show();
 								dialog.cancel();
@@ -136,6 +136,36 @@ public class ClassFragment extends Fragment {
 		});
 		
 		return ret;
+	}
+	
+	public static void ClassExists(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(ret.getContext());
+		builder.setTitle("Error");
+		builder.setMessage("The class already exists");
+		
+		builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, just close
+				dialog.cancel();
+			}
+		});
+		
+		// create alert dialog
+		AlertDialog error = builder.create();
+		error.show();
+	}
+	
+	public static void AddToList(String className){
+		int nameLength = className.length();
+		int arrayLength = colorArray.length;
+		int color = colorArray[arrayLength%nameLength];
+		
+		//add the class to the list
+		Class newClass = new Class(className.toString(), color);
+		classList.add(newClass);
+		
+		//notify adapter
+		adapter.notifyDataSetChanged();
 	}
 	
 }

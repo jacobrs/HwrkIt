@@ -59,10 +59,10 @@ public class User {
 	}
 	
 	// Asynchronously register a class
-		public static Void registerClass(String className){
+		public static Void registerClass(String className, int userID){
 			String url = "http://linux2-cs.johnabbott.qc.ca:30000/classes";
 			// Async request
-			asyncCreateClass doCreate = new asyncCreateClass(className);
+			asyncCreateClass doCreate = new asyncCreateClass(className, userID);
 			doCreate.execute(url);
 			return null;
 		}
