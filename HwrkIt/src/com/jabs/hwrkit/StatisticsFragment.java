@@ -4,7 +4,6 @@ package com.jabs.hwrkit;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
@@ -13,15 +12,16 @@ import com.jabs.structures.HwrkTime;
 import com.jabs.structures.Class;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,6 +40,7 @@ public class StatisticsFragment extends Fragment{
     float SUGGESTED_HOURS = 3 * 60 * 60; //Suggested amount of hours per course (course outline), in seconds
     private HashMap<Integer, ArrayList<HwrkTime>> allClasses = new HashMap<Integer, ArrayList<HwrkTime>>();
     private LinkedList<HwrkTime> hwrkTimes = new LinkedList<HwrkTime>();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -78,6 +79,9 @@ public class StatisticsFragment extends Fragment{
                 TextView avgWeek = (TextView) ret.findViewById(R.id.avgWeek);
                 TextView totWeek = (TextView) ret.findViewById(R.id.totWeek);
                 TextView avgDay = (TextView) ret.findViewById(R.id.avgDay);
+                ImageView status = (ImageView) ret.findViewById(R.id.status);
+
+
                 //PIE CHART
                 pg.removeSlices();
                 int i = 0;
@@ -98,10 +102,10 @@ public class StatisticsFragment extends Fragment{
                     slice.setValue(percentage);
                     pg.addSlice(slice);
 
-                    // LINE GRAPH
+                    // BAR GRAPH
 
                     Bar d = new Bar();
-                    d.setColor(Color.parseColor(colors.get(i%colors.size())));
+                    d.setColor(Color.parseColor(colors.get(i % colors.size())));
                     d.setName(time.getFormattedTimeSpent());
                     d.setValue(time.getLengthSeconds() /60); //minutes
                     points.add(d);
@@ -140,6 +144,17 @@ public class StatisticsFragment extends Fragment{
                 pg.animateToGoalValues();
 
                 // Process stats
+                Float weekBeforeLast = getTimesTotal(allClasses.get(position),14)/SUGGESTED_HOURS - total;
+                if (total > weekBeforeLast){
+                    status.setImageResource(R.drawable.ic_trending_up_24px);
+                }
+                else if (total < weekBeforeLast){
+                    status.setImageResource(R.drawable.ic_trending_down_24px);
+                }
+                else{
+                    status.setImageResource(R.drawable.ic_trending_neutral_24px);
+                }
+
                 //Avg week
                 if (classTimes.size()!=0) {
                     avgWeek.setText(new Float(getTimesTotal(classTimes, 7) / classTimes.size() / 60).toString() + " average minutes this week");
