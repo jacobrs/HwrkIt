@@ -92,7 +92,6 @@ public class StatisticsFragment extends Fragment{
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
@@ -114,11 +113,6 @@ public class StatisticsFragment extends Fragment{
          pg.removeSlices();
          int i = 0;
          float total = 0;
-         Line l = new Line();
-         LinePoint p = new LinePoint();
-         p.setX(0);
-         p.setY(0);
-         l.addPoint(p);
          classTimes = getTimesOverRange(classTimes, 7); //get class times in last 7 days
          ArrayList<Bar> points = new ArrayList<Bar>();
          for (HwrkTime time : classTimes) {
@@ -138,11 +132,6 @@ public class StatisticsFragment extends Fragment{
              d.setValue(time.getLengthSeconds() /60); //minutes
              points.add(d);
 
-
-             p = new LinePoint();
-             p.setX(i+1);
-             p.setY(time.getLengthSeconds()/60); //Minutes
-             l.addPoint(p);
              i++;
          }
          barGraph.setBars(points);
@@ -185,14 +174,17 @@ public class StatisticsFragment extends Fragment{
 
          //Avg week
          if (classTimes.size()!=0) {
-             avgWeek.setText(new Float(getTimesTotal(classTimes, 7) / classTimes.size() / 60).toString() + " average minutes this week");
-             avgDay.setText(new Float(getTimesTotal(classTimes,1) / classTimes.size() / 60).toString() + " average minutes today");
-             totWeek.setText(new Float(getTimesTotal(classTimes, 7) / 60).toString() + " total minutes this week");
+             avgWeek.setText(String.format("%.1f", (getTimesTotal(classTimes, 7) / classTimes.size() / 60)) + " average minutes this week");
+             totWeek.setText(String.format("%.1f", (getTimesTotal(classTimes, 7) / 60)) + " total minutes this week");
          }else {
              avgWeek.setText("0 average minutes this week");
-             avgDay.setText("0 average minutes today");
              totWeek.setText("0 total minutes this week");
          }
+         ArrayList<HwrkTime> day = getTimesOverRange(classTimes, 1);
+         if (day.size() !=0)
+            avgDay.setText(String.format("%.1f", (getTimesTotal(day,1) / day.size() / 60)) + " average minutes today");
+         else
+            avgDay.setText("0 average minutes today");
 	}
 	
     //get the total amount of time spent over a duration, in seconds
@@ -200,7 +192,6 @@ public class StatisticsFragment extends Fragment{
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
         float total = 0;
         Date dateRange = new Date((System.currentTimeMillis() - (duration * DAY_IN_MS)));
-        ArrayList<HwrkTime> theTimes = new ArrayList<HwrkTime>();
         for (HwrkTime time: times){
             if (time.getStartTime().getTime() > dateRange.getTime()){
                 total += time.getLengthSeconds();
@@ -213,7 +204,6 @@ public class StatisticsFragment extends Fragment{
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
         ArrayList<HwrkTime> rangeTimes = new ArrayList<HwrkTime>();
         Date dateRange = new Date((System.currentTimeMillis() - (duration * DAY_IN_MS)));
-        ArrayList<HwrkTime> theTimes = new ArrayList<HwrkTime>();
         for (HwrkTime time: times){
             if (time.getStartTime().getTime() > dateRange.getTime()){
                 rangeTimes.add(time);

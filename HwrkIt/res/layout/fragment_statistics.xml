@@ -3,53 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
         <TextView
             android:id="@+id/StatisticsType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:text="Hours this week/Recommended 3 hours"
             android:layout_gravity="center_horizontal" />
 
 
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+                <FrameLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
-        <com.echo.holographlibrary.PieGraph
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleY="-1"
-            android:scaleX="-1"
-            android:id="@+id/graph"/>
-        <TextView
-            android:id="@+id/percentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="40dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"
-            android:text="No completion %" />
+                <com.echo.holographlibrary.PieGraph
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleY="-1"
+                    android:scaleX="-1"
+                    android:id="@+id/graph"/>
+                <TextView
+                    android:id="@+id/percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
+                    android:text="No completion %" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/status"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_trending_neutral_24px" />
-    </FrameLayout>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/status"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_trending_neutral_24px" />
+        </FrameLayout>
         <Spinner
             android:id="@+id/classSpinner"
             android:layout_width="175dp"
+            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -65,6 +68,7 @@
             android:layout_height="wrap_content"
             android:text="No weekly times"
             android:paddingLeft="15dp"
+            android:layout_marginTop="7dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <TextView
             android:id="@+id/avgWeek"
@@ -72,6 +76,7 @@
             android:layout_height="wrap_content"
             android:text="No weekly times"
             android:paddingLeft="15dp"
+            android:layout_marginTop="7dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -80,19 +85,12 @@
             android:layout_height="wrap_content"
             android:text="No daily times"
             android:paddingLeft="15dp"
+            android:layout_marginTop="7dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="125dp">
-
-                <com.echo.holographlibrary.BarGraph
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:id="@+id/barGraph"/>
-
-            </RelativeLayout>
-
-
+         <com.echo.holographlibrary.BarGraph
+             android:layout_width="match_parent"
+             android:layout_height="375dp"
+             android:layout_marginBottom="20dp"
+             android:id="@+id/barGraph"/>
         </LinearLayout>
 </ScrollView>
