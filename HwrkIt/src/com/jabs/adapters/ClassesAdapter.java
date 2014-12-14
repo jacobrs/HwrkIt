@@ -46,8 +46,8 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		
 		// get the current class
 		Class curr = getItem(position);
-		int[] colorArray = {Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA,
-			  Color.RED, Color.YELLOW};
+		String[] colorArray = {"#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4",
+			  "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722"};
 		
 		// get references to views on page
 		final TextView className = (TextView) rowView.findViewById(R.id.className);
@@ -65,7 +65,7 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		if(nameLength == 0){
 		   color = Color.parseColor("#0066cc");
 		}else{
-		   color = colorArray[nameLength%arrayLength];
+		   color = Color.parseColor(colorArray[nameLength%arrayLength]);
 		}
 		artwork.setImageDrawable(new LetterAvatar(artwork.getContext(), color, curr.getClassName().substring(0,1), 7));
 		
