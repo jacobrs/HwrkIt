@@ -52,7 +52,8 @@ public class StatisticsFragment extends Fragment{
         colors.add("#EF6C00");
         colors.add("#FB8C00");
         colors.add("#FFE0B2");
-
+        final String NO_COLOR = "#C0C0C0"; //Where no data is on chart
+        
         User theUser = User.getInstance();
 
         Spinner spinner = (Spinner) ret.findViewById(R.id.classSpinner);
