@@ -2,6 +2,7 @@ package com.jabs.globals;
 
 import java.util.ArrayList;
 
+import com.jabs.tasks.asyncCreateClass;
 import com.jabs.tasks.asyncLogin;
 import com.jabs.tasks.asyncRegister;
 
@@ -56,6 +57,15 @@ public class User {
 		doRegister.execute(url);
 		return null;
 	}
+	
+	// Asynchronously register a class
+		public static Void registerClass(String className){
+			String url = "http://linux2-cs.johnabbott.qc.ca:30000/classes";
+			// Async request
+			asyncCreateClass doCreate = new asyncCreateClass(className);
+			doCreate.execute(url);
+			return null;
+		}
 	
 	// Body of the User class
 	private int userID;
