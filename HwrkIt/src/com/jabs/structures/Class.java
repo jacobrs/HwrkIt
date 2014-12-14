@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 public class Class {
 	private String _className;
-	private int _resid;
+	private int _color;
 	private ArrayList<HwrkTime> times = new ArrayList<HwrkTime>();
 	// add students maybe
 	// and maybe also the teacher
 	
 	public Class(String name){
 		this._className = name;
+		this._color = 0;
 	}
 	
 	public Class(String name, int artId){
 		this._className = name;
-		this._resid = artId;
+		this._color = artId;
 	}
 
 	public String getClassName() {
@@ -26,12 +27,12 @@ public class Class {
 		this._className = name;
 	}
 
-	public int getResId() {
-		return this._resid;
+	public int getColor() {
+		return this._color;
 	}
 
-	public void setResId(int resid) {
-		this._resid = resid;
+	public void setColor(int color) {
+		this._color = color;
 	}
 	
 	public void setTimes(ArrayList<HwrkTime> times){

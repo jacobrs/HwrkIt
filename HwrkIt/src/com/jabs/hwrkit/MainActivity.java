@@ -78,12 +78,18 @@ public class MainActivity extends ActionBarActivity
 		FragmentManager fragmentManager = getSupportFragmentManager();
 	    switch(position) {
 	        case 0:
+                mTitle = getString(R.string.title_section1);
+                restoreActionBar();
 	        	fragment = new StatisticsFragment();
 	            break;
-	        case 1: 
+	        case 1:
+                mTitle = getString(R.string.title_section2);
+                restoreActionBar();
 	        	fragment = new ClassFragment();
 	            break;
-	        case 2: 
+	        case 2:
+                mTitle = getString(R.string.title_section3);
+                restoreActionBar();
 	        	fragment = new HwrkFragment();
 	            break;
 	        default : 

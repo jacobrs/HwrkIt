@@ -26,6 +26,7 @@ import com.jabs.structures.HwrkTime;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 /****************************************************************
  * @author Benjamin Barault
@@ -189,7 +190,7 @@ public class asyncLogin extends AsyncTask<String, Void, Void> {
 								try {
 									endDate = format.parse(endTimeString);
 									startDate = format.parse(startTimeString);
-									HwrkTime tempTime = new HwrkTime(endDate, startDate);
+									HwrkTime tempTime = new HwrkTime(startDate, endDate);
 									// Add this particular time to our container
 									allTheTimes.add(tempTime);
 								} catch (ParseException e) {

@@ -8,8 +8,6 @@
         android:id="@+id/classArt"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:padding="16dp"
-        android:background="#999999"
         android:scaleType="centerCrop" />
 
     <LinearLayout
