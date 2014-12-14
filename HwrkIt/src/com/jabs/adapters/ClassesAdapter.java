@@ -7,6 +7,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import com.jabs.structures.LetterAvatar;
 public class ClassesAdapter extends ArrayAdapter<Class>{
 	private final static int CLASSES_ROW_LAYOUT = R.layout.row_layout;
 	private List<Class> classList;
-	private int color = Color.parseColor("#0066cc");
+	private int defaultColor = Color.parseColor("#0066cc");
 	
 	public ClassesAdapter(Context context, List<Class> classList){
 		super(context, CLASSES_ROW_LAYOUT, classList);
@@ -45,6 +46,8 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		
 		// get the current class
 		Class curr = getItem(position);
+		int[] colorArray = {Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA,
+			  Color.RED, Color.YELLOW};
 		
 		// get references to views on page
 		final TextView className = (TextView) rowView.findViewById(R.id.className);
@@ -52,14 +55,17 @@ public class ClassesAdapter extends ArrayAdapter<Class>{
 		
 		// set the text of the views
 		className.setText(curr.getClassName());
+		
+		int nameLength = curr.getClassName().length();
+		Log.d("Name Length", String.valueOf(nameLength));
+		int arrayLength = colorArray.length;
+		Log.d("Array Length", String.valueOf(arrayLength));
 		int color;
 		
-		// if color has been set
-		if(curr.getColor() != 0){
-			color = curr.getColor();
+		if(nameLength == 0){
+		   color = Color.parseColor("#0066cc");
 		}else{
-			// default is blue
-			color = Color.parseColor("#FDD835");  
+		   color = colorArray[nameLength%arrayLength];
 		}
 		artwork.setImageDrawable(new LetterAvatar(artwork.getContext(), color, curr.getClassName().substring(0,1), 7));
 		

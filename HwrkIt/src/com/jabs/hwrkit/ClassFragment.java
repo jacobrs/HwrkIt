@@ -32,8 +32,6 @@ public class ClassFragment extends Fragment {
 	
 	public static Boolean classExists;
 	private static List<Class> classList;
-	private static int[] colorArray = {Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA,
-			  Color.RED, Color.YELLOW};
 	private static ClassesAdapter adapter;
 	private static View ret;
 	
@@ -155,13 +153,9 @@ public class ClassFragment extends Fragment {
 		error.show();
 	}
 	
-	public static void AddToList(String className){
-		int nameLength = className.length();
-		int arrayLength = colorArray.length;
-		int color = colorArray[arrayLength%nameLength];
-		
+	public static void AddToList(String className){	
 		//add the class to the list
-		Class newClass = new Class(className.toString(), color);
+		Class newClass = new Class(className.toString());
 		classList.add(newClass);
 		
 		//notify adapter
