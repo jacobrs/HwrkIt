@@ -68,11 +68,15 @@ public class User {
 		}
 	
 	// Body of the User class
+	private int userID;
 	private String email;
 	private String name;
 	private char userType;
 	private ArrayList<Class> usersClasses = new ArrayList<Class>();
 	
+	public void setID(int userID){
+		this.userID = userID;
+	}
 	public void setEmail(String email){
 		this.email = email;
 	}
@@ -83,6 +87,10 @@ public class User {
 	
 	public void setUserType(char userType){
 		this.userType = userType;
+	}
+	
+	public int getID(){
+		return this.userID;
 	}
 	
 	public String getEmail(){
