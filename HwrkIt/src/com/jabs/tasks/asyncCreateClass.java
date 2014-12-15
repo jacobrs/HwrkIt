@@ -143,7 +143,6 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 						conTwo.setRequestProperty("Content-Type", "application/json");
 						int RCodeTwo = conTwo.getResponseCode();
 						if(RCodeTwo == 200){
-							Log.d("POST MESSAGE", conTwo.getResponseMessage());
 							Log.d("Got JSON", "Success");
 							//parse the json received
 							//create a scanner
@@ -174,16 +173,15 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 											
 											// Link to all of this user's classes
 											href = linksSelf.getString("href");
-											String[] splitHref = href.split("/");
-											href = splitHref[splitHref.length-1];
-											classID = Integer.parseInt(href);
-											Log.d("Class ID", String.valueOf(classID));
-											// end loop
 											successGET = true;
-											break;
 										}
 									}
 									if(successGET){
+										// got the class ID of the class just posted
+										String[] splitHref = href.split("/");
+										href = splitHref[splitHref.length-1];
+										classID = Integer.parseInt(href);
+										
 										// post to assignations
 										Log.d("Post to Assignations", "Success");
 										URL urlThree;
