@@ -37,6 +37,11 @@ To point the app to your spring server and work on a forked version, replace the
 ```
 <br><br>
 
+#### Mysql Dumps
+
+* Download dump file with starter data [here](https://drive.google.com/file/d/0By8SOmpQcCoKNkhHbjhFOWdIY1k/view?usp=sharing)
+* Download dump file of just structure [here](https://drive.google.com/file/d/0By8SOmpQcCoKcUFPeUZKZDdrNU0/view?usp=sharing)
+
 *Libraries used:*
 - https://android.googlesource.com/platform/frameworks/opt/datetimepicker/+/master
 - https://bitbucket.org/danielnadeau/holographlibrary/wiki/Home
