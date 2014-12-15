@@ -3,8 +3,6 @@ package com.jabs.hwrkit;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LinePoint;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.jabs.globals.User;
@@ -12,7 +10,6 @@ import com.jabs.structures.HwrkTime;
 import com.jabs.structures.Class;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,8 +25,6 @@ import android.widget.TextView;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-
 
 public class StatisticsFragment extends Fragment{
 	public StatisticsFragment() {
@@ -39,7 +34,6 @@ public class StatisticsFragment extends Fragment{
     // This should be changed for the user to customize it. Need to add to DB
     float SUGGESTED_HOURS = 3 * 60 * 60; //Suggested amount of hours per course (course outline), in seconds
     private HashMap<Integer, ArrayList<HwrkTime>> allClasses = new HashMap<Integer, ArrayList<HwrkTime>>();
-    private LinkedList<HwrkTime> hwrkTimes = new LinkedList<HwrkTime>();
 
     private int clickedPosition;
     private String NO_COLOR = "#C0C0C0"; //Where no data is on chart

@@ -1,6 +1,7 @@
 package com.jabs.hwrkit;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -193,7 +194,19 @@ public class HwrkFragment extends Fragment {
 			start += " "+startHour+":"+startMinute+":00";
 			
 			HwrkTime timeToAdd = new HwrkTime(start, end, this.addingClass);
-			asyncAddTime ad = new asyncAddTime(User.getInstance().getID(), this.context, this, timeToAdd, addingClass);
+            User theUser = User.getInstance();
+			asyncAddTime ad = new asyncAddTime(theUser.getID(), this.context, this, timeToAdd, addingClass);
+            ArrayList<Class> classes = theUser.getClasses();
+
+            for (Class theClass: classes){
+                if (theClass==addingClass){
+                    ArrayList<HwrkTime> times = theClass.getTimes();
+                    times.add(timeToAdd);
+                    theClass.setTimes(times);
+                }
+            }
+            theUser.setClasses(classes);
+
 			ad.execute();
 		}
 	}
