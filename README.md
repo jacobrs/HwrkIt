@@ -14,7 +14,7 @@ This project will give students and teachers the ability to monitor, analyze, an
 
 #### How to Install
 
-* Download the .apk file from [Here](https://drive.google.com/file/d/0By8SOmpQcCoKcEhmVFAzSmFtVFU/view?usp=sharing)
+* Download the .apk file from [Here](https://drive.google.com/file/d/0B2d7QKcZf3UXR3RJa1B6cHNoNmc/view?usp=sharing)
 * If you downloaded the apk onto your computer, transfer it to your phone
 * On your phone use a file explorer app and navigate to the place where you stored the apk file
 * Then click on the apk and the installation should commence<br><br>
