@@ -155,7 +155,7 @@ public class ClassFragment extends Fragment {
 	
 	public static void AddToList(String className){	
 		//add the class to the list
-		Class newClass = new Class(className.toString());
+		Class newClass = new Class(className.toString(), 0);
 		classList.add(newClass);
 		
 		//notify adapter

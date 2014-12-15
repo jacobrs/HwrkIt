@@ -175,7 +175,7 @@ public class asyncLogin extends AsyncTask<String, Void, Void> {
 							
 							// Create a temporary class and the container for all
 							// the times that belong to this class
-							Class tempClass = new Class(className);
+							Class tempClass = new Class(classID, className);
 							ArrayList<HwrkTime> allTheTimes = new ArrayList<HwrkTime>();
 							
 							// Get all the times for this particular class

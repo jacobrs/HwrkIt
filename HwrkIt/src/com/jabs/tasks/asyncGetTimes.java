@@ -84,7 +84,7 @@ public class asyncGetTimes extends AsyncTask<String, Void, Void> {
 						for (int i = 0; i < classes.length(); i++) {
 							JSONObject tmp = classes.getJSONObject(i);
 							tmpclass = tmp.getString("Name");
-							Class obj = new Class(tmpclass);
+							Class obj = new Class(tmpclass, 0);
 							JSONArray tms = tmp.getJSONArray("times");
 							for (int k = 0; k < tms.length(); k++) {
 								JSONObject hw = tms.getJSONObject(k);

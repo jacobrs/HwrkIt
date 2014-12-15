@@ -22,8 +22,8 @@ public class HwrkTime {
 	
 	@SuppressLint("SimpleDateFormat") public HwrkTime(String start, String end, Class parent){
 		try {
-			startTime = new SimpleDateFormat("d-M-y h:m:s", Locale.ENGLISH).parse(start);
-			endTime = new SimpleDateFormat("d-M-y h:m:s", Locale.ENGLISH).parse(end);
+			startTime = new SimpleDateFormat("y-M-d h:m:s", Locale.ENGLISH).parse(start);
+			endTime = new SimpleDateFormat("y-M-d h:m:s", Locale.ENGLISH).parse(end);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			startTime = null;
@@ -31,7 +31,7 @@ public class HwrkTime {
 			e.printStackTrace();
 		}
 		this.parent = parent;
-		Format formatter = new SimpleDateFormat("EEEE");
+		Format formatter = new SimpleDateFormat("EEEE, MMM W, yyy");
 		this.desc = "On " + formatter.format(startTime);
 	}
 
@@ -97,5 +97,21 @@ public class HwrkTime {
 	
 	public String getDesc(){
 		return this.desc;
+	}
+	
+	public String getStartTimeString(){
+		String build = new SimpleDateFormat("y-M-d", Locale.ENGLISH).format(startTime);
+		build+="T";
+		build+= new SimpleDateFormat("hh:mm:ss", Locale.ENGLISH).format(startTime);
+		build+=".000+0000";
+		return build;
+	}
+	
+	public String getEndTimeString(){
+		String build = new SimpleDateFormat("y-M-d", Locale.ENGLISH).format(endTime);
+		build+="T";
+		build+= new SimpleDateFormat("hh:mm:ss", Locale.ENGLISH).format(endTime);
+		build+=".000+0000";
+		return build;
 	}
 }

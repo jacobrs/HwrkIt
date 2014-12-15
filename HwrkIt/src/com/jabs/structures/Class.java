@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Class {
 	private String _className;
 	private int _color;
+	private int _classid;
 	private ArrayList<HwrkTime> times = new ArrayList<HwrkTime>();
 	// add students maybe
 	// and maybe also the teacher
 	
-	public Class(String name){
+	public Class(int classid, String name){
 		this._className = name;
 		this._color = 0;
+		this._classid = classid;
 	}
 	
 	public Class(String name, int artId){
@@ -26,7 +28,7 @@ public class Class {
 	public void setClassName(String name) {
 		this._className = name;
 	}
-
+	
 	public int getColor() {
 		return this._color;
 	}
@@ -41,6 +43,10 @@ public class Class {
 	
 	public ArrayList<HwrkTime> getTimes(){
 		return this.times;
+	}
+	
+	public int getClassID(){
+		return this._classid;
 	}
 	
 }
