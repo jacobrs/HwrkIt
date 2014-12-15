@@ -2,7 +2,9 @@ package com.jabs.hwrkit;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +31,7 @@ public class LoginActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
  		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); 
  		actionBar.setCustomView(R.layout.abs_login_layout);
-        
+ 		
  		// If this is the first time then set the defaults
         if (savedInstanceState == null) {
            mShowingBack = false;
@@ -60,44 +62,70 @@ public class LoginActivity extends ActionBarActivity {
 	}
 	
 	// Flip the card and change the fragment view
-	public void flipCard() {
+	public void flipCard(Boolean frontIsLost) {
 		// If we're displaying the back then simply
 		// remove the back from our stack (animation
 		// will occur automatically)
-	    if (mShowingBack) {
+	    if (mShowingBack && !frontIsLost) {
 	    	mShowingBack = false;
 	        getFragmentManager().popBackStack();
 	        return;
-	    }
-
-	    // Flip to the back.
-
-	    mShowingBack = true;
-
-	    // Create and commit a new fragment transaction that adds the fragment for the back of
-	    // the card, uses custom animations, and is part of the fragment manager's back stack.
-
-	    getFragmentManager()
-	            .beginTransaction()
-
-	            // Replace the default fragment animations with animator resources representing
-	            // rotations when switching to the back of the card, as well as animator
-	            // resources representing rotations when flipping back to the front (e.g. when
-	            // the system Back button is pressed).
-	            .setCustomAnimations(
-	                    R.animator.card_flip_right_in, R.animator.card_flip_right_out,
-	                    R.animator.card_flip_left_in, R.animator.card_flip_left_out)
-
-	            // Replace any fragments currently in the container view with a fragment
-	            // representing the next page (indicated by the just-incremented currentPage
-	            // variable).
-	            .replace(R.id.container, LoginBackFragment.newInstance(this))
-
-	            // Add this transaction to the back stack, allowing users to press Back
-	            // to get to the front of the card.
-	            .addToBackStack(null)
-
-	            // Commit the transaction.
-	            .commit();
+	    }else if(frontIsLost){
+	    	mShowingBack = false;
+	    	// Create and commit a new fragment transaction that adds the fragment for the back of
+		    // the card, uses custom animations, and is part of the fragment manager's back stack.
+	
+		    getFragmentManager()
+		            .beginTransaction()
+	
+		            // Replace the default fragment animations with animator resources representing
+		            // rotations when switching to the back of the card, as well as animator
+		            // resources representing rotations when flipping back to the front (e.g. when
+		            // the system Back button is pressed).
+		            .setCustomAnimations(
+		                    R.animator.card_flip_right_in, R.animator.card_flip_right_out,
+		                    R.animator.card_flip_left_in, R.animator.card_flip_left_out)
+	
+		            // Replace any fragments currently in the container view with a fragment
+		            // representing the next page (indicated by the just-incremented currentPage
+		            // variable).
+		            .replace(R.id.container, LoginFrontFragment.newInstance(this))
+	
+		            // Add this transaction to the back stack, allowing users to press Back
+		            // to get to the front of the card.
+		            .addToBackStack(null)
+	
+		            // Commit the transaction.
+		            .commit();
+	    }else{
+		    // Flip to the back.
+		    mShowingBack = true;
+	
+		    // Create and commit a new fragment transaction that adds the fragment for the back of
+		    // the card, uses custom animations, and is part of the fragment manager's back stack.
+	
+		    getFragmentManager()
+		            .beginTransaction()
+	
+		            // Replace the default fragment animations with animator resources representing
+		            // rotations when switching to the back of the card, as well as animator
+		            // resources representing rotations when flipping back to the front (e.g. when
+		            // the system Back button is pressed).
+		            .setCustomAnimations(
+		                    R.animator.card_flip_right_in, R.animator.card_flip_right_out,
+		                    R.animator.card_flip_left_in, R.animator.card_flip_left_out)
+	
+		            // Replace any fragments currently in the container view with a fragment
+		            // representing the next page (indicated by the just-incremented currentPage
+		            // variable).
+		            .replace(R.id.container, LoginBackFragment.newInstance(this))
+	
+		            // Add this transaction to the back stack, allowing users to press Back
+		            // to get to the front of the card.
+		            .addToBackStack(null)
+	
+		            // Commit the transaction.
+		            .commit();
+		}
 	}
 }

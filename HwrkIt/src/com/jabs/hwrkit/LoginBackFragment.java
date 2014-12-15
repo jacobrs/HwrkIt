@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -47,7 +48,12 @@ public class LoginBackFragment extends Fragment {
 	Resources r;
 	String Errors;
 	String error;
+	boolean lostInfo;
 	boolean setOnce;
+	
+	// This is literally needed so you can rotate the screen
+	public LoginBackFragment(){
+	}
 	
 	public LoginBackFragment(LoginActivity cont){
 		// Used for flipping animation
@@ -58,6 +64,14 @@ public class LoginBackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+		if(savedInstanceState != null){
+			lostInfo = savedInstanceState.getBoolean("LostInfo");
+			if(lostInfo){
+	        	prevCont = this.getActivity().getApplicationContext();
+	        	prevAct = (LoginActivity) this.getActivity();
+	        }
+		}
         View ret = inflater.inflate(R.layout.activity_register, container, false);
 
         // Makes sure something is set once (because it moves)
@@ -128,13 +142,20 @@ public class LoginBackFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				if(!pauseListener){
-					prevAct.flipCard();
+					prevAct.flipCard(lostInfo);
 				}
 			}
         });
         
         return ret;
     }
+    
+    @Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		outState.putBoolean("LostInfo", true);
+		super.onSaveInstanceState(outState);
+	}
     
     // This function simply gets the text from an edittext
     // and returns it's string value

@@ -2,6 +2,7 @@ package com.jabs.hwrkit;
 
 import com.jabs.globals.User;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.animation.AnimatorSet;
@@ -9,6 +10,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Fragment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,11 +45,16 @@ public class LoginFrontFragment extends Fragment {
 	
 	// NORMAL GLOBAL VARIABLES
 	LoginActivity prevAct;
-	Context prevCont;
 	Resources r;
+	TextView signUpTxt;
+	Context prevCont;
 	String passwordErr;
 	String emailErr;
 	String error;
+	
+	// This is literally needed so you can rotate the screen
+	public LoginFrontFragment(){
+	}
 	
 	public LoginFrontFragment(LoginActivity cont){
 		// This is used to flip the card
@@ -58,7 +65,15 @@ public class LoginFrontFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View ret = inflater.inflate(R.layout.activity_login, container, false);
+		super.onCreate(savedInstanceState);
+		if(savedInstanceState != null){
+			Boolean lostInfo = savedInstanceState.getBoolean("LostInfo");
+			if(lostInfo){
+	        	prevCont = this.getActivity().getApplicationContext();
+	        	prevAct = (LoginActivity) this.getActivity();
+	        }
+		}
+		View ret = inflater.inflate(R.layout.activity_login, container, false);
         
         // Get resources for unit conversion
  		r = getResources();
@@ -76,7 +91,7 @@ public class LoginFrontFragment extends Fragment {
  		final Context thisContext = prevCont;
  		final EditText emailTxt = (EditText) ret.findViewById(R.id.email);
  		final EditText passwordTxt = (EditText) ret.findViewById(R.id.password);
- 		final TextView signUpTxt = (TextView) ret.findViewById(R.id.tvSignUp);
+ 		signUpTxt = (TextView) ret.findViewById(R.id.tvSignUp);
  		passwordErr = "";
  		emailErr = "";
  		pauseListener = false;
@@ -122,7 +137,7 @@ public class LoginFrontFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				if(!pauseListener){
-					prevAct.flipCard();
+					prevAct.flipCard(false);
 				}
 			}
  		});
@@ -130,6 +145,12 @@ public class LoginFrontFragment extends Fragment {
  		return ret;
     }
 	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		outState.putBoolean("LostInfo", true);
+		super.onSaveInstanceState(outState);
+	}
 	
 	// This returns general errors, things like empty variables
 	public String getGenErrors(String prepend, EditText field){

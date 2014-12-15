@@ -9,8 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jabs.hwrkit.LoginActivity" >
-        
-        
+    
     <LinearLayout
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
