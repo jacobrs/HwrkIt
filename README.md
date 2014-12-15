@@ -54,7 +54,7 @@ To point the app to your spring server and work on a forked version, replace the
 #### Mysql Dumps
 
 * Download dump file with starter data [here](https://drive.google.com/file/d/0By8SOmpQcCoKNkhHbjhFOWdIY1k/view?usp=sharing)
-* Download dump file of just structure [here](https://drive.google.com/file/d/0By8SOmpQcCoKcUFPeUZKZDdrNU0/view?usp=sharing)<br><br>
+* Download dump file of just structure [here](https://drive.google.com/file/d/0B2d7QKcZf3UXb3I3Q0ZkRFJzM2M/view?usp=sharing)<br><br>
 
 *Libraries used:*
 - https://android.googlesource.com/platform/frameworks/opt/datetimepicker/+/master
