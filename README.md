@@ -27,6 +27,14 @@ This project will give students and teachers the ability to monitor, analyze, an
 * **The Statistics** tab will display different things dependent on the type of user.However if a student is logged in, the app will display personal averages and statistics based on the homework times they have inserted for ALL classes. This is a sort of overview tab.<br><br>
 * **The Logout** tab will delete the user from the SQLite local database, destroy the HTTP cookie store and bring the user to the Login screen.<br><br>
 
+#### Starting the server
+
+* To start the server copy the jar file from [here](https://github.com/jacobrs/HwrkIt/blob/master/rest-server-0.1.0.jar) to your server
+* Run it using this command (Replace "PORT" with the port you want to use):
+```
+	java -jar rest-server-0.1.0.jar --server.port=PORT
+```
+
 #### Point to Your Spring Server
 
 To point the app to your spring server and work on a forked version, replace the URLs in async tasks
