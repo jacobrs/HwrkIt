@@ -1,6 +1,9 @@
 package com.jabs.structures;
 
+import android.annotation.SuppressLint;
 import com.jabs.structures.Class;
+
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,10 +20,10 @@ public class HwrkTime {
 		this.endTime = endTime;
 	}
 	
-	public HwrkTime(String start, String end, Class parent, String desc){
+	@SuppressLint("SimpleDateFormat") public HwrkTime(String start, String end, Class parent){
 		try {
-			startTime = new SimpleDateFormat("d/M/y h:m:s", Locale.ENGLISH).parse(start);
-			endTime = new SimpleDateFormat("d/M/y h:m:s", Locale.ENGLISH).parse(end);
+			startTime = new SimpleDateFormat("d-M-y h:m:s", Locale.ENGLISH).parse(start);
+			endTime = new SimpleDateFormat("d-M-y h:m:s", Locale.ENGLISH).parse(end);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			startTime = null;
@@ -28,10 +31,8 @@ public class HwrkTime {
 			e.printStackTrace();
 		}
 		this.parent = parent;
-		this.desc = desc;
-		if(desc == ""){
-			this.desc = "No details inputed";
-		}
+		Format formatter = new SimpleDateFormat("EEEE");
+		this.desc = "On " + formatter.format(startTime);
 	}
 
 	public Date getStartTime() {
@@ -70,7 +71,7 @@ public class HwrkTime {
 			}
 			if(mins > 0){
 				String add = (mins > 1)?"s":"";
-				if(seconds > 0 && more){
+				if(more){
 					ret += " and " + mins.toString() + " minute"+add;
 				}else{
 					ret += mins.toString() + " minute"+add;
@@ -80,9 +81,10 @@ public class HwrkTime {
 			if(seconds > 0){
 				String add = (seconds > 1)?"s":"";
 				if(more){
-					ret += " and " + seconds.toString() + "second"+add;
+					ret += " and " + seconds.toString() + " second"+add;
 				}
 			}
+			ret += " spent";
 		}else{
 			ret = "no time spent";
 		}
