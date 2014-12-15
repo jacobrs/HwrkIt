@@ -102,7 +102,18 @@ public class asyncAddTime extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void v) {
 		if(this.success){
+            User theUser = User.getInstance();
 			parent.fetchTimes(this.prevCont);
+            ArrayList<Class> classes = theUser.getClasses();
+
+            for (Class theClass: classes){
+                if (theClass==this.addClass){
+                    ArrayList<HwrkTime> times = theClass.getTimes();
+                    times.add(this.addTime);
+                    theClass.setTimes(times);
+                }
+            }
+            theUser.setClasses(classes);
 		}
 		return;
 	}
