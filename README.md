@@ -35,6 +35,13 @@ This project will give students and teachers the ability to monitor, analyze, an
 	java -jar rest-server-0.1.0.jar --server.port=PORT
 ```
 
+* To make it run in the background press ctrl-z to stop the job and then run these commands:
+```
+	jobs
+	bg %job_number
+```
+Where "job_number" is the number of the job
+
 #### Point to Your Spring Server
 
 To point the app to your spring server and work on a forked version, replace the URLs in async tasks
