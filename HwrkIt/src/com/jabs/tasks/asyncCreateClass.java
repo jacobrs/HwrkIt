@@ -50,7 +50,7 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 		// check if class already exists
 		URL urlCheck;
 		try{
-			urlCheck = new URL("http://linux2-cs.johnabbott.qc.ca:30000/classes");
+			urlCheck = new URL("http://linux2-cs.johnabbott.qc.ca/~cs616_f14_6/api/getUsersClasses.php?uid="+userID);
 			HttpURLConnection conCheck = (HttpURLConnection) urlCheck.openConnection();
 			conCheck.setRequestMethod("GET");
 			
@@ -71,16 +71,15 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 				JSONTokener tokener = new JSONTokener(json);
 				try{
 					JSONObject root = (JSONObject) tokener.nextValue();
-					if(root.has("_embedded")){	
+					if(root.has("classes")){	
 						Log.d("Got Embedded first time", "Success");
-						JSONObject realRoot = root.getJSONObject("_embedded");
-						JSONArray res = realRoot.getJSONArray("classes");
+						JSONArray classes = root.getJSONArray("classes");
 						
 						// loop over as many classes as you have
 						// end loop when previously inputed class is found
-						for(int i = 0; i < res.length(); i++){
-							JSONObject currClass = res.getJSONObject(i);
-							String name = currClass.getString("className");
+						for(int i = 0; i < classes.length(); i++){
+							JSONObject currClass = classes.getJSONObject(i);
+							String name = currClass.getString("Name");
 							Log.d("Current Class Name", name.toString());
 							if(name.equals(className)){
 								Log.d("Found Class", "Failure");
@@ -123,11 +122,13 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 				// Output the json
 				out.write("{ \"className\": \""+className+"\", \"theTeacher\": \""+theTeacher+"\" }");
 				out.flush();
+				
 				int RCode = con.getResponseCode();
 				if(RCode == 201){
 					Log.d("Created Class", "Success");
 					// Successfully created the Class
 					// Get the class id of the class just posted
+					
 					URL urlTwo;
 					String href = "";
 					try{
@@ -142,6 +143,7 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 						conTwo.setRequestProperty("Content-Type", "application/json");
 						int RCodeTwo = conTwo.getResponseCode();
 						if(RCodeTwo == 200){
+							Log.d("POST MESSAGE", conTwo.getResponseMessage());
 							Log.d("Got JSON", "Success");
 							//parse the json received
 							//create a scanner
