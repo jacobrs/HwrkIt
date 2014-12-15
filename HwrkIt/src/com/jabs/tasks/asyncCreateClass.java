@@ -259,7 +259,7 @@ public class asyncCreateClass extends AsyncTask<String, Void, Void>{
 			ClassFragment.ClassExists();
 			Log.d("EXISTS", "SHOULD ALREADY EXIST");
 		}else{
-			ClassFragment.AddToList(className);
+			ClassFragment.AddToList(className, classID);
 		}
 		return;
 	}

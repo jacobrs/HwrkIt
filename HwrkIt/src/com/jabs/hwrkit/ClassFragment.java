@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class ClassFragment extends Fragment {
 	
 	public static Boolean classExists;
-	private static List<Class> classList;
+	private static ArrayList<Class> classList;
 	private static ClassesAdapter adapter;
 	private static View ret;
 	
@@ -153,10 +153,11 @@ public class ClassFragment extends Fragment {
 		error.show();
 	}
 	
-	public static void AddToList(String className){	
+	public static void AddToList(String className, int classid){	
 		//add the class to the list
-		Class newClass = new Class(className.toString(), 0);
+		Class newClass = new Class(classid, className.toString());
 		classList.add(newClass);
+		User.getInstance().setClasses(classList);
 		
 		//notify adapter
 		adapter.notifyDataSetChanged();
