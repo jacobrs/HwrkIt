@@ -70,6 +70,8 @@ public class LoginBackFragment extends Fragment {
 			if(lostInfo){
 	        	prevCont = this.getActivity().getApplicationContext();
 	        	prevAct = (LoginActivity) this.getActivity();
+	        	LoginActivity.setMissing(true);
+	        	LoginActivity.setBack(true);
 	        }
 		}
         View ret = inflater.inflate(R.layout.activity_register, container, false);

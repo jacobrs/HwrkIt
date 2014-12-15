@@ -20,12 +20,15 @@ import android.view.MenuItem;
  * 
  ****************************************************************/
 public class LoginActivity extends ActionBarActivity {
-	private boolean mShowingBack;
+	private static boolean frontMissing;
+	private static boolean mShowingBack;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logres_frags);
+        
+        frontMissing = false;
         
         // Show our custom action bar
         ActionBar actionBar = getSupportActionBar();
@@ -127,5 +130,22 @@ public class LoginActivity extends ActionBarActivity {
 		            // Commit the transaction.
 		            .commit();
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(mShowingBack){
+			flipCard(frontMissing);
+		}else{
+			super.onBackPressed();
+		}
+	}
+	
+	public static void setMissing(boolean missing){
+		frontMissing = missing;
+	}
+	
+	public static void setBack(boolean backIsTrue){
+		mShowingBack = backIsTrue;
 	}
 }
