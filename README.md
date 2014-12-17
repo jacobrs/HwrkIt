@@ -23,7 +23,7 @@ This project will give students and teachers the ability to monitor, analyze, an
 
 * **The main fragment** will be using a drawer menu with classes, homework, statistics and a logout tab. These will be linked to separate activities described below. <br><br>
 * **The Classes** tab will consist of a listview with all the classes accessible to the users. Once a list element is clicked, the app will switch to a statistics view showing the student’s time spent and the homework blocks he/she inserted. Students will also have the round “add a homework time” button in the bottom right that shows up in the main fragment.<br><br>
-* **The Homework** tab will show the a list of inputed homework times, this is where the user can add homework time for indivdual classes by choosing a start and end time<br><br>
+* **The Homework** tab will show the a list of inputted homework times, this is where the user can add homework time for individual classes by choosing a start and end time<br><br>
 * **The Statistics** tab will display different things dependent on the type of user.However if a student is logged in, the app will display personal averages and statistics based on the homework times they have inserted for ALL classes. This is a sort of overview tab.<br><br>
 * **The Logout** tab will delete the user from the SQLite local database, destroy the HTTP cookie store and bring the user to the Login screen.<br><br>
 
