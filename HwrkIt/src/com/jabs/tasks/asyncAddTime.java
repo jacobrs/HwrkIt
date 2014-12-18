@@ -60,7 +60,12 @@ public class asyncAddTime extends AsyncTask<String, Void, Void> {
 		URL url;
 		try {
 			// Prepare our create method
+
+			Log.d("Passing?", this.addTime.getStartTimeString());
+			Log.d("Passing?", this.addTime.getEndTimeString());
+			
 			url = new URL(queryURL);
+			
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
 			
@@ -85,6 +90,7 @@ public class asyncAddTime extends AsyncTask<String, Void, Void> {
 				Log.d("Passing?", "Success");
 				this.success = true;
 			}
+			
 		} catch (MalformedURLException e) {
 			// Will happen very rarely unless the user is trying something
 			// malicious or is using

@@ -93,7 +93,7 @@ public class HwrkFragment extends Fragment {
 					android.app.FragmentManager fm = getActivity()
 							.getFragmentManager();
 					DialogFragment fragment = TimePickerDialog.newInstance(
-							clb, 12, 0, true);
+							clb, 12, 0, false);
 					fragment.show(fm, "Start Time");
 					// Toast.makeText(getActivity(), "Add homework popup",
 					// Toast.LENGTH_SHORT).show();
@@ -131,7 +131,7 @@ public class HwrkFragment extends Fragment {
 			android.app.FragmentManager fm = getActivity()
 					.getFragmentManager();
 			DialogFragment fragment = TimePickerDialog.newInstance(
-					clb, startHour, (startMinute + 30) % 60, true);
+					clb, startHour, (startMinute + 30) % 60, false);
 			fragment.show(fm, "End Time?");
 		}
 
@@ -158,7 +158,6 @@ public class HwrkFragment extends Fragment {
 							
 					((ClassOptionAdapter) parent.getAdapter()).closeModal();
 					addingClass = (Class) parent.getAdapter().getItem(position);
-					Log.d("Passing?", addingClass.getClassID()+"");
 					submitTime();
 					
 				}
@@ -180,20 +179,24 @@ public class HwrkFragment extends Fragment {
 			Date today = c.getTime();
 			String start = new SimpleDateFormat("y-M-d", Locale.ENGLISH).format(today);
 			
-			/* check if you have to switch end time to start time because its smaller */
-			if((endHour * 60 + endMinute) < (startHour * 60 + startMinute)){
-				int tmp = endHour;
-				endHour = startHour;
-				startHour = tmp;
-				tmp = endMinute;
-				endMinute = startMinute;
-				startMinute = tmp;
-			}
-			
 			String end = start + " "+endHour+":"+endMinute+":00";
 			start += " "+startHour+":"+startMinute+":00";
 			
 			HwrkTime timeToAdd = new HwrkTime(start, end, this.addingClass);
+			
+			/* check if you have to add a day to the end time because
+			 *  start time is larger */
+			if(timeToAdd.getStartTime().after(timeToAdd.getEndTime())){
+				timeToAdd.getEndTime().setTime(timeToAdd.getEndTime().getTime() + 86400000);
+			}
+			
+			/* this will make the date go a day back if the start time is in the future
+			if(timeToAdd.getStartTime().after(today)){
+				timeToAdd.getStartTime().setTime(timeToAdd.getStartTime().getTime() - 86400000);
+				timeToAdd.getEndTime().setTime(timeToAdd.getEndTime().getTime() - 86400000);
+			}
+			*/
+			
 			asyncAddTime ad = new asyncAddTime(User.getInstance().getID(), this.context, this, timeToAdd, addingClass);
 
 			ad.execute();
