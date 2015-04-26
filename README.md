@@ -59,7 +59,7 @@ To point the app to your spring server and work on a forked version, replace the
 
 #### Operating Environments
 
-* Android phone or tablet running Ice Cream Sandwitch is needed
+* Android phone or tablet running Ice Cream Sandwich is needed
 
 *Libraries used:*
 - https://android.googlesource.com/platform/frameworks/opt/datetimepicker/+/master
